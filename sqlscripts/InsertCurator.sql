@@ -1,4 +1,4 @@
-INSERT INTO curator VALUES(1, 4);
+﻿INSERT INTO curator VALUES(1, 4);
 INSERT INTO curator VALUES(2, 8);
 INSERT INTO curator VALUES(3, 3);
 INSERT INTO curator VALUES(4, 10);

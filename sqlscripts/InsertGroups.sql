@@ -1,4 +1,4 @@
-INSERT INTO groups (name) VALUES(111);
+﻿INSERT INTO groups (name) VALUES(111);
 INSERT INTO groups (name) VALUES(112);
 INSERT INTO groups (name) VALUES(113);
 INSERT INTO groups (name) VALUES(121);

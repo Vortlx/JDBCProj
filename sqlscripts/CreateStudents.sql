@@ -1,4 +1,4 @@
-CREATE TABLE students(
+﻿CREATE TABLE students(
 	id INT UNSIGNED AUTO_INCREMENT,
 	name VARCHAR(255),
 	family_name VARCHAR(255),

@@ -1,4 +1,4 @@
-source ./JAVAProj/JDBCProj/sqlscripts/CreateStudents.sql;
+﻿source ./JAVAProj/JDBCProj/sqlscripts/CreateStudents.sql;
 source ./JAVAProj/JDBCProj/sqlscripts/CreateTeachers.sql;
 source ./JAVAProj/JDBCProj/sqlscripts/CreateGroups.sql;
 source ./JAVAProj/JDBCProj/sqlscripts/CreateStudentInGroup.sql;

@@ -1,4 +1,4 @@
-CREATE TABLE student_in_group(
+﻿CREATE TABLE student_in_group(
 	id_group INT UNSIGNED,
 	id_student INT UNSIGNED UNIQUE,
 	

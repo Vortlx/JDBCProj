@@ -1,4 +1,4 @@
-INSERT INTO student_in_group VALUES(1, 1);
+﻿INSERT INTO student_in_group VALUES(1, 1);
 INSERT INTO student_in_group VALUES(1, 2);
 INSERT INTO student_in_group VALUES(1, 3);
 INSERT INTO student_in_group VALUES(1, 4);

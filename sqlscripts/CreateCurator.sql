@@ -1,4 +1,4 @@
-CREATE TABLE curator(
+﻿CREATE TABLE curator(
 	id_group INT UNSIGNED UNIQUE,
 	id_teacher INT UNSIGNED UNIQUE,
 	
