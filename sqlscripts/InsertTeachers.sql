@@ -1,0 +1,15 @@
+INSERT INTO teachers (name, family_name) VALUES('Илья', 'Ковалёв');
+INSERT INTO teachers (name, family_name) VALUES('Борис', 'Абрамов');
+INSERT INTO teachers (name, family_name) VALUES('Ксения', 'Шашкова');
+INSERT INTO teachers (name, family_name) VALUES('София', 'Тимофеева');
+INSERT INTO teachers (name, family_name) VALUES('Богдан', 'Самойлов');
+INSERT INTO teachers (name, family_name) VALUES('Светлана', 'Романова');
+INSERT INTO teachers (name, family_name) VALUES('Даниил', 'Владимиров');
+INSERT INTO teachers (name, family_name) VALUES('Дарья', 'Степанова');
+INSERT INTO teachers (name, family_name) VALUES('Валентин', 'Королёв');
+INSERT INTO teachers (name, family_name) VALUES('Дмитрий', 'Трофимов');
+INSERT INTO teachers (name, family_name) VALUES('Пётр', 'Большаков');
+INSERT INTO teachers (name, family_name) VALUES('Евгения', 'Уварова');
+INSERT INTO teachers (name, family_name) VALUES('Семён', 'Рябов');
+INSERT INTO teachers (name, family_name) VALUES('Надежда', 'Антонова');
+INSERT INTO teachers (name, family_name) VALUES('Игорь', 'Захаров');

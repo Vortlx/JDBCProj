@@ -1,0 +1,76 @@
+INSERT INTO students (name, family_name) VALUES('Вадим', 'Брагин');
+INSERT INTO students (name, family_name) VALUES('Германн', 'Маслов');
+INSERT INTO students (name, family_name) VALUES('Алла', 'Никифорова');
+INSERT INTO students (name, family_name) VALUES('Георгий', 'Авдеев');
+INSERT INTO students (name, family_name) VALUES('Агата', 'Фадеева');
+INSERT INTO students (name, family_name) VALUES('Елена', 'Соболева');
+INSERT INTO students (name, family_name) VALUES('Артём', 'Дьячков');
+INSERT INTO students (name, family_name) VALUES('Надежда', 'Дмитриева');
+INSERT INTO students (name, family_name) VALUES('Иван', 'Калинин');
+INSERT INTO students (name, family_name) VALUES('Ольга', 'Андреева');
+
+INSERT INTO students (name, family_name) VALUES('Тамара', 'Аксёнова');
+INSERT INTO students (name, family_name) VALUES('Яков', 'Рогов');
+INSERT INTO students (name, family_name) VALUES('Олег', 'Якушев');
+INSERT INTO students (name, family_name) VALUES('Антон', 'Носов');
+INSERT INTO students (name, family_name) VALUES('Демьян', 'Маслов');
+INSERT INTO students (name, family_name) VALUES('Андрей', 'Комиссаров');
+INSERT INTO students (name, family_name) VALUES('Артём', 'Кудрявцев');
+INSERT INTO students (name, family_name) VALUES('Алевтина', 'Белозёрова');
+INSERT INTO students (name, family_name) VALUES('Алла', 'Соловьёва');
+INSERT INTO students (name, family_name) VALUES('Лидия', 'Шилова');
+
+INSERT INTO students (name, family_name) VALUES('Александр', 'Потапов');
+INSERT INTO students (name, family_name) VALUES('Юлия', 'Селиверстова');
+INSERT INTO students (name, family_name) VALUES('Любовь', 'Харитонова');
+INSERT INTO students (name, family_name) VALUES('Алевтина', 'Третьякова');
+INSERT INTO students (name, family_name) VALUES('Павел', 'Бобров');
+INSERT INTO students (name, family_name) VALUES('Клавдия', 'Соболева');
+INSERT INTO students (name, family_name) VALUES('Регина', 'Веселова');
+INSERT INTO students (name, family_name) VALUES('Майя', 'Аксёнова');
+INSERT INTO students (name, family_name) VALUES('Нонна', 'Орехова');
+INSERT INTO students (name, family_name) VALUES('Руслан', 'Алексеев');
+
+INSERT INTO students (name, family_name) VALUES('Ярослав', 'Путин');
+INSERT INTO students (name, family_name) VALUES('Александр', 'Орехов');
+INSERT INTO students (name, family_name) VALUES('Ираида', 'Ильина');
+INSERT INTO students (name, family_name) VALUES('Антонина', 'Щербакова');
+INSERT INTO students (name, family_name) VALUES('Ким', 'Белов');
+INSERT INTO students (name, family_name) VALUES('Всеволод', 'Блохин');
+INSERT INTO students (name, family_name) VALUES('Феврония', 'Кудрявцева');
+INSERT INTO students (name, family_name) VALUES('Анжелика', 'Зуева');
+INSERT INTO students (name, family_name) VALUES('Егор', 'Лапин');
+INSERT INTO students (name, family_name) VALUES('Евгения', 'Доронина');
+
+INSERT INTO students (name, family_name) VALUES('Нина', 'Титова');
+INSERT INTO students (name, family_name) VALUES('Леонид', 'Антонов');
+INSERT INTO students (name, family_name) VALUES('Егор', 'Алексеев');
+INSERT INTO students (name, family_name) VALUES('Елизавета', 'Воронова');
+INSERT INTO students (name, family_name) VALUES('Анна', 'Белякова');
+INSERT INTO students (name, family_name) VALUES('Фёдор', 'Самсонов');
+INSERT INTO students (name, family_name) VALUES('Валерий', 'Туров');
+INSERT INTO students (name, family_name) VALUES('Василий', 'Селиверстов');
+INSERT INTO students (name, family_name) VALUES('Арсений', 'Лебедев');
+INSERT INTO students (name, family_name) VALUES('Валерия', 'Силина');
+
+INSERT INTO students (name, family_name) VALUES('Всеволод', 'Кулаков');
+INSERT INTO students (name, family_name) VALUES('Любовь', 'Ефремова');
+INSERT INTO students (name, family_name) VALUES('Раиса', 'Рожкова');
+INSERT INTO students (name, family_name) VALUES('Макар', 'Исаков');
+INSERT INTO students (name, family_name) VALUES('Вячеслав', 'Некрасов');
+INSERT INTO students (name, family_name) VALUES('Любовь', 'Гурьева');
+INSERT INTO students (name, family_name) VALUES('Борис', 'Белоусов');
+INSERT INTO students (name, family_name) VALUES('Надежда', 'Никитина');
+INSERT INTO students (name, family_name) VALUES('Иван', 'Калашников');
+INSERT INTO students (name, family_name) VALUES('Семён', 'Коновалов');
+
+INSERT INTO students (name, family_name) VALUES('Вера', 'Шарапова');
+INSERT INTO students (name, family_name) VALUES('Святослав', 'Егоров');
+INSERT INTO students (name, family_name) VALUES('Полина', 'Фадеева');
+INSERT INTO students (name, family_name) VALUES('Ольга', 'Веселова');
+INSERT INTO students (name, family_name) VALUES('Анастасия', 'Матвиенко');
+INSERT INTO students (name, family_name) VALUES('Александр', 'Михайлов');
+INSERT INTO students (name, family_name) VALUES('Юрий', 'Мишин');
+INSERT INTO students (name, family_name) VALUES('Максим', 'Логинов');
+INSERT INTO students (name, family_name) VALUES('Денис', 'Мамонтов');
+INSERT INTO students (name, family_name) VALUES('Светлана', 'Кузьмина');

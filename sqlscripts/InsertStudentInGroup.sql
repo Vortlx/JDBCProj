@@ -1,0 +1,76 @@
+INSERT INTO student_in_group VALUES(1, 1);
+INSERT INTO student_in_group VALUES(1, 2);
+INSERT INTO student_in_group VALUES(1, 3);
+INSERT INTO student_in_group VALUES(1, 4);
+INSERT INTO student_in_group VALUES(1, 5);
+INSERT INTO student_in_group VALUES(1, 6);
+INSERT INTO student_in_group VALUES(1, 7);
+INSERT INTO student_in_group VALUES(1, 8);
+INSERT INTO student_in_group VALUES(1, 9);
+INSERT INTO student_in_group VALUES(1, 10);
+
+INSERT INTO student_in_group VALUES(2, 11);
+INSERT INTO student_in_group VALUES(2, 12);
+INSERT INTO student_in_group VALUES(2, 13);
+INSERT INTO student_in_group VALUES(2, 14);
+INSERT INTO student_in_group VALUES(2, 15);
+INSERT INTO student_in_group VALUES(2, 16);
+INSERT INTO student_in_group VALUES(2, 17);
+INSERT INTO student_in_group VALUES(2, 18);
+INSERT INTO student_in_group VALUES(2, 19);
+INSERT INTO student_in_group VALUES(2, 20);
+
+INSERT INTO student_in_group VALUES(3, 21);
+INSERT INTO student_in_group VALUES(3, 22);
+INSERT INTO student_in_group VALUES(3, 23);
+INSERT INTO student_in_group VALUES(3, 24);
+INSERT INTO student_in_group VALUES(3, 25);
+INSERT INTO student_in_group VALUES(3, 26);
+INSERT INTO student_in_group VALUES(3, 27);
+INSERT INTO student_in_group VALUES(3, 28);
+INSERT INTO student_in_group VALUES(3, 29);
+INSERT INTO student_in_group VALUES(3, 30);
+
+INSERT INTO student_in_group VALUES(4, 31);
+INSERT INTO student_in_group VALUES(4, 32);
+INSERT INTO student_in_group VALUES(4, 33);
+INSERT INTO student_in_group VALUES(4, 34);
+INSERT INTO student_in_group VALUES(4, 35);
+INSERT INTO student_in_group VALUES(4, 36);
+INSERT INTO student_in_group VALUES(4, 37);
+INSERT INTO student_in_group VALUES(4, 38);
+INSERT INTO student_in_group VALUES(4, 39);
+INSERT INTO student_in_group VALUES(4, 40);
+
+INSERT INTO student_in_group VALUES(5, 41);
+INSERT INTO student_in_group VALUES(5, 42);
+INSERT INTO student_in_group VALUES(5, 43);
+INSERT INTO student_in_group VALUES(5, 44);
+INSERT INTO student_in_group VALUES(5, 45);
+INSERT INTO student_in_group VALUES(5, 46);
+INSERT INTO student_in_group VALUES(5, 47);
+INSERT INTO student_in_group VALUES(5, 48);
+INSERT INTO student_in_group VALUES(5, 49);
+INSERT INTO student_in_group VALUES(5, 50);
+
+INSERT INTO student_in_group VALUES(6, 51);
+INSERT INTO student_in_group VALUES(6, 52);
+INSERT INTO student_in_group VALUES(6, 53);
+INSERT INTO student_in_group VALUES(6, 54);
+INSERT INTO student_in_group VALUES(6, 55);
+INSERT INTO student_in_group VALUES(6, 56);
+INSERT INTO student_in_group VALUES(6, 57);
+INSERT INTO student_in_group VALUES(6, 58);
+INSERT INTO student_in_group VALUES(6, 59);
+INSERT INTO student_in_group VALUES(6, 60);
+
+INSERT INTO student_in_group VALUES(7, 61);
+INSERT INTO student_in_group VALUES(7, 62);
+INSERT INTO student_in_group VALUES(7, 63);
+INSERT INTO student_in_group VALUES(7, 64);
+INSERT INTO student_in_group VALUES(7, 65);
+INSERT INTO student_in_group VALUES(7, 66);
+INSERT INTO student_in_group VALUES(7, 67);
+INSERT INTO student_in_group VALUES(7, 68);
+INSERT INTO student_in_group VALUES(7, 69);
+INSERT INTO student_in_group VALUES(7, 70);
