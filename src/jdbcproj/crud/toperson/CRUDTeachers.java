@@ -15,7 +15,12 @@ import jdbcproj.person.Person;
 import static jdbcproj.resources.Resources.DRIVER_CLASS;
 import static jdbcproj.resources.Resources.URL;
 
-
+/**
+ * This class implements CRUD operation for teachers table.
+ * 
+ * @author Lebedev Alexander
+ * @since 2016-09-03
+ * */
 public class CRUDTeachers implements CRUDPerson {
 
 	static{
@@ -26,6 +31,16 @@ public class CRUDTeachers implements CRUDPerson {
 		}
 	}
 	
+	/**
+	 * This method insert data into teachers table.
+	 * 
+	 *  @see CRUDPerson#add(String, String)
+	 *  
+	 *  @param name Name of teacher.
+	 *  @param familyName Family name of teacher.
+	 *  @throw SQLException
+	 *  @return Nothing.
+	 * */
 	@Override
 	public void add(String name, String familyName) throws SQLException {
 		
@@ -41,6 +56,18 @@ public class CRUDTeachers implements CRUDPerson {
 		conn.close();
 	}
 
+	/**
+	 * This method update data into teachers table.
+	 * 
+	 * @see CRUDPerson#update(String, String, String, String)
+	 * 
+	 * @param name Old name of teacher.
+	 * @param familyName Old family name of teacher.
+	 * @param newName New name of teacher.
+	 * @param newFamilyName New family name of teacher.
+	 * @throw SQLException
+	 * @return Nothing.
+	 * */
 	@Override
 	public void update(String name, String familyName, String newName, String newFamilyName) throws SQLException {
 
@@ -58,6 +85,16 @@ public class CRUDTeachers implements CRUDPerson {
 		conn.close();
 	}
 
+	/**
+	 * This method delete data from teachers table.
+	 * 
+	 * @see CRUDPerson#delete(String, String)
+	 * 
+	 * @param name Name of teacher.
+	 * @param familyName Family name of teacher.
+	 * @throw SQLException
+	 * @return Nothing
+	 * */
 	@Override
 	public void delete(String name, String familyName) throws SQLException {
 		
@@ -73,6 +110,14 @@ public class CRUDTeachers implements CRUDPerson {
 		conn.close();
 	}
 
+	/**
+	 * This method return list of all teachers.
+	 * 
+	 * @see CRUDPerson#getAll()
+	 * 
+	 * @throw SQLException
+	 * @return List of persons
+	 * */
 	@Override
 	public List<Person> getAll() throws SQLException {
 		
@@ -96,6 +141,15 @@ public class CRUDTeachers implements CRUDPerson {
 		return res;
 	}
 
+	/**
+	 * This method return list of all teachers who have a specific name.
+	 * 
+	 * @see CRUDPerson#getByName(String)
+	 * 
+	 * @param name Name of teacher for whom there is a search
+	 * @throw SQLException
+	 * @return List of person who have a specific name
+	 * */
 	@Override
 	public List<Person> getByName(String name) throws SQLException {
 
@@ -120,6 +174,15 @@ public class CRUDTeachers implements CRUDPerson {
 		return res;
 	}
 
+	/**
+	 * This method return list of all teachers who have a specific family name.
+	 * 
+	 * @see CRUDPerson#getByFamilyName(String)
+	 * 
+	 * @param familyName Family name of teacher for whom there is a search
+	 * @throw SQLException
+	 * @return List of person who have a specific family name
+	 * */
 	@Override
 	public List<Person> getByFamilyName(String familyName) throws SQLException {
 

@@ -12,6 +12,13 @@ import java.util.ArrayList;
 import static jdbcproj.resources.Resources.DRIVER_CLASS;
 import static jdbcproj.resources.Resources.URL;
 
+
+/**
+ * This class implements CRUD operation for groups table in database.
+ * 
+ * @author Lebedev Alexander
+ * @since 2016-09-03
+ * */
 public class CRUDGroup {
 	
 	static{
@@ -22,6 +29,13 @@ public class CRUDGroup {
 		}
 	}
 
+	/**
+	 * This method insert data into groups table .
+	 *
+	 * @param name Name of new group.
+	 * @throw SQLException
+	 * @return Nothing
+	 * */
 	public void add(String name) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(URL);
@@ -35,6 +49,14 @@ public class CRUDGroup {
 		conn.close();
 	}
 	
+	/**
+	 * This method update data in groups table.
+	 * 
+	 * @param name Old name of group
+	 * @param newName New name of group
+	 * @throw SQLException
+	 * @return Nothing
+	 * */
 	public void update(String name, String newName) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(URL);
@@ -49,6 +71,13 @@ public class CRUDGroup {
 		conn.close();
 	}
 	
+	/**
+	 * This method delete data from groups table.
+	 * 
+	 * @param name Name of group which must be deleted.
+	 * @throw SQLException
+	 * @return Nothing
+	 * */
 	public void delete(String name) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(URL);
@@ -62,6 +91,13 @@ public class CRUDGroup {
 		conn.close();
 	}
 	
+	
+	/**
+	 * This method return list of all existing groups.
+	 * 
+	 * @throw SQLException
+	 * @return List of name (String) of all groups
+	 * */
 	public List<String> getAll() throws SQLException{
 		
 		List<String> res = new ArrayList<String>();
