@@ -1,17 +1,18 @@
-package jdbcproj.crud.toperson;
+package jdbcproj.dao.toperson;
 
 import java.util.List;
-import java.sql.SQLException;
 
-import jdbcproj.person.Person;
+import jdbcproj.data.person.Person;
+
+import java.sql.SQLException;
 
 /**
  * This interface contain CRUD methods for table which contain something person. 
  * 
  * @author Lebedev Alexander
- * @since 2016-09-03
+ * @since 2016-09-07
  * */
-public interface CRUDPerson {
+public interface DAOPerson {
 	
 	/**
 	 * This method insert data into person table. For example into students.

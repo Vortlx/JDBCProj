@@ -1,12 +1,13 @@
-package jdbcproj.person;
+package jdbcproj.data.person;
+
 
 /**
- * This class description of person. For example student or teacher.
+ * This abstract class describe a person. For example student or teacher.
  * 
  * @author Lebedev Alexander
- * @since 2016-09-03
+ * @since 2016-09-05
  * */
-public class Person {
+public abstract class Person {
 	
 	private String name;
 	private String familyName;
