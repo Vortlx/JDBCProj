@@ -10,6 +10,7 @@ import jdbcproj.data.person.Person;
 import jdbcproj.data.person.Student;
 import jdbcproj.data.group.Group;
 
+
 /**
  * This Class using for testing other classes.
  * 
@@ -42,7 +43,7 @@ public class Main{
 			for(Student i: test.getStudents()){
 				System.out.println(i.getName() + " " + i.getFamilyName());
 			}
-			
+
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
