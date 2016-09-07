@@ -10,14 +10,14 @@ import java.util.ArrayList;
  * */
 public class Teacher extends Person {
 
-    private ArrayList<Integer> groups;
+    private ArrayList<String> groups;
 
     /**
      * This constructor create undefined teacher.
      * */
     public Teacher(){
         super();
-        groups = new ArrayList<Integer>();
+        groups = new ArrayList<String>();
     }
 
     /**
@@ -28,7 +28,7 @@ public class Teacher extends Person {
      * */
     public Teacher(String name, String familyName){
         super(name, familyName);
-        groups = new ArrayList<Integer>();
+        groups = new ArrayList<String>();
     }
 
     /**
@@ -38,7 +38,7 @@ public class Teacher extends Person {
      *  @param familyName Family name of teacher
      *  @param groups List of groups which help teacher
      * */
-    public Teacher(String name, String familyName, ArrayList<Integer> groups){
+    public Teacher(String name, String familyName, ArrayList<String> groups){
         super(name, familyName);
         this.groups = groups;
     }
@@ -48,7 +48,7 @@ public class Teacher extends Person {
      *
      * @return List List of group which help teacher
      * */
-    public ArrayList<Integer> getGroups() {
+    public ArrayList<String> getGroups() {
         return groups;
     }
 
@@ -59,7 +59,7 @@ public class Teacher extends Person {
      *  @param newGroup Name of new group
      *  @return Nothing
      * */
-    public void addGroup(int newGroup){
+    public void addGroup(String newGroup){
         groups.add(newGroup);
     }
 
@@ -69,7 +69,7 @@ public class Teacher extends Person {
      * @param newGroups List of new groups
      * @return Nothing
      * */
-    public void set(ArrayList<Integer> newGroups){
+    public void set(ArrayList<String> newGroups){
         groups = newGroups;
     }
 
@@ -80,7 +80,7 @@ public class Teacher extends Person {
      *  @param newGroup Number of new group
      *  @return Nothing
      * */
-    public void set(int oldGroup, int newGroup){
+    public void set(int oldGroup, String newGroup){
         if(groups.contains(oldGroup)){
             int idx = groups.indexOf(oldGroup);
             groups.set(idx, newGroup);

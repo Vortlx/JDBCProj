@@ -46,38 +46,8 @@ public class DAOGroup {
 		String query = "INSERT INTO groups (name) VALUES ('" + group.getName() + "')";
 		Statement statement = conn.createStatement();
 		statement.executeUpdate(query);
+		
 		statement.close();
-		
-		int idGroup = -1;
-		query = "SELECT id FROM groups WHERE name = '" + group.getName() + "'";
-		statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery(query);
-		if(rs.next()){
-			idGroup = rs.getInt("id");
-		}
-		statement.close();
-		
-		query = "INSERT INTO student_in_group(id_group, id_student) VALUES(?, ?)";
-		String idStudentQuery = "SELECT id FROM students WHERE name = ? AND family_name = ?";
-		PreparedStatement statementToRelation = conn.prepareStatement(query);
-		PreparedStatement statementToStudents = conn.prepareStatement(idStudentQuery);
-		for(Student student: group.getStudents()){
-			int idStudent = -1;
-			statementToStudents.setString(1, student.getName());
-			statementToStudents.setString(2, student.getFamilyName());
-			rs = statementToStudents.executeQuery();
-			if(rs.next()){
-				idStudent = rs.getInt("id");
-			}
-
-			statementToRelation.setInt(1, idGroup);
-			statementToRelation.setInt(2, idStudent);
-			statementToRelation.executeUpdate();
-		}
-		
-		statementToRelation.close();
-		statementToStudents.close();
-		rs.close();
 		conn.close();
 	}
 	
@@ -134,10 +104,12 @@ public class DAOGroup {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "SELECT students.name, students.family_name, tmp.name FROM students "
-				+ "INNER JOIN (SELECT student_in_group.id_student, groups.name FROM groups INNER JOIN "
-				+ "student_in_group WHERE groups.id = student_in_group.id_group) AS tmp "
-				+ "WHERE tmp.id_student = students.id";
+		String query = "SELECT students.name, students.family_name, tmp.name "
+							+ "FROM students INNER JOIN ("
+							+ "SELECT student_in_group.id_student, groups.name "
+							+ "FROM groups INNER JOIN student_in_group "
+							+ "WHERE groups.id = student_in_group.id_group AND groups.name = '" + name + "') AS tmp "
+							+ "WHERE tmp.id_student = students.id";
 		
 		Statement statement = conn.createStatement();
 		ResultSet rs = statement.executeQuery(query);

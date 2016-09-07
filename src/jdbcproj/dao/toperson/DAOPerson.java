@@ -22,7 +22,7 @@ public interface DAOPerson {
 	 *  @throw SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(String name, String familyName) throws SQLException ;
+	public void add(Person person) throws SQLException ;
 	
 	/**
 	 * This method update data into person table. For example into students.
@@ -34,7 +34,7 @@ public interface DAOPerson {
 	 * @throw SQLException
 	 * @return Nothing.
 	 * */
-	public void update(String name, String familyName, String newName, String newFamilyName) throws SQLException ;
+	public void update(Person oldPerson, Person newPerson) throws SQLException ;
 	
 	/**
 	 * This method delete data from person table. For example from students.
@@ -44,32 +44,5 @@ public interface DAOPerson {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void delete(String name, String familyName) throws SQLException ;
-	
-	
-	/**
-	 * This method return list of all persons.
-	 * 
-	 * @throw SQLException
-	 * @return List of persons
-	 * */
-	public List<Person> getAll() throws SQLException;
-	
-	/**
-	 * This method return list of all persons who have a specific name.
-	 * 
-	 * @param name Name of person for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific name
-	 * */
-	public List<Person> getByName(String name) throws SQLException;
-	
-	/**
-	 * This method return list of all persons who have a specific family name.
-	 * 
-	 * @param familyName Family name of person for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific family name
-	 * */
-	public List<Person> getByFamilyName(String familyName) throws SQLException;
+	public void delete(Person person) throws SQLException ;
 }

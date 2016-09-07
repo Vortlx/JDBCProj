@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import java.util.List;
 
 import jdbcproj.data.person.Person;
@@ -43,16 +43,51 @@ public class DAOTeachers implements DAOPerson {
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(String name, String familyName) throws SQLException {
+	public void add(Person person) throws SQLException {
 		
+		Teacher teacher = (Teacher) person;
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "INSERT INTO teachers (name, family_name) VALUES (?, ?)";
+		String query = "INSERT INTO teachers (name, family_name) VALUES(?, ?)";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, name);
-		statement.setString(2, familyName);
+		statement.setString(1, teacher.getName());
+		statement.setString(2, teacher.getFamilyName());
 		statement.executeUpdate();
+		statement.close();
 		
+		query = "INSERT INTO curator(id_group, id_teacher) VALUES(?, ?)";
+		statement = conn.prepareStatement(query);
+		
+		// Get teacher ID
+		int teacherID = -1;
+		List<String> groups = teacher.getGroups();
+		
+		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + teacher.getName() +
+									"' AND family_name = '" + teacher.getFamilyName() + "'";
+		Statement getIDTeacher = conn.createStatement();
+		ResultSet rs = getIDTeacher.executeQuery(teacherIDQuery);
+		if(rs.next()){
+			teacherID = rs.getInt(1);
+		}
+		
+		//Get group ID
+		String groupIDQuery = "SELECT id FROM groups WHERE name = ?"; 
+		PreparedStatement getIDGroup = conn.prepareStatement(groupIDQuery);
+		for(String group: groups){
+			int groupID = -1;
+			getIDGroup.setString(1, group);
+			
+			rs = getIDGroup.executeQuery(groupIDQuery);
+			if(rs.next()){
+				groupID = rs.getInt(1);
+			}
+			
+			statement.setInt(groupID, teacherID);
+			statement.executeUpdate();
+			
+		}
+		rs.close();
+		getIDGroup.close();
 		statement.close();
 		conn.close();
 	}
@@ -70,16 +105,16 @@ public class DAOTeachers implements DAOPerson {
 	 * @return Nothing.
 	 * */
 	@Override
-	public void update(String name, String familyName, String newName, String newFamilyName) throws SQLException {
+	public void update(Person oldPerson, Person newPerson) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "UPDATE teachers SET name = ?, family_name = ? WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(3, name);
-		statement.setString(4, familyName);
-		statement.setString(1, newName);
-		statement.setString(2, newFamilyName);
+		statement.setString(3, oldPerson.getName());
+		statement.setString(4, oldPerson.getFamilyName());
+		statement.setString(1, newPerson.getName());
+		statement.setString(2, newPerson.getFamilyName());
 		statement.executeUpdate();
 		
 		statement.close();
@@ -97,14 +132,14 @@ public class DAOTeachers implements DAOPerson {
 	 * @return Nothing
 	 * */
 	@Override
-	public void delete(String name, String familyName) throws SQLException {
+	public void delete(Person person) throws SQLException {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "DELETE FROM teachers WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, name);
-		statement.setString(2, familyName);
+		statement.setString(1, person.getName());
+		statement.setString(2, person.getFamilyName());
 		statement.executeUpdate();
 		
 		statement.close();
@@ -119,10 +154,9 @@ public class DAOTeachers implements DAOPerson {
 	 * @throw SQLException
 	 * @return List of persons
 	 * */
-	@Override
-	public List<Person> getAll() throws SQLException {
+	public List<Teacher> getAll() throws SQLException {
 		
-		List<Person> res = new ArrayList<Person>();
+		List<Teacher> res = new ArrayList<Teacher>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "SELECT name, family_name FROM teachers";
@@ -151,10 +185,9 @@ public class DAOTeachers implements DAOPerson {
 	 * @throw SQLException
 	 * @return List of person who have a specific name
 	 * */
-	@Override
-	public List<Person> getByName(String name) throws SQLException {
+	public List<Teacher> getByName(String name) throws SQLException {
 
-		List<Person> res = new ArrayList<Person>();
+		List<Teacher> res = new ArrayList<Teacher>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "SELECT name, family_name FROM teachers WHERE name = ?";
@@ -184,10 +217,9 @@ public class DAOTeachers implements DAOPerson {
 	 * @throw SQLException
 	 * @return List of person who have a specific family name
 	 * */
-	@Override
-	public List<Person> getByFamilyName(String familyName) throws SQLException {
+	public List<Teacher> getByFamilyName(String familyName) throws SQLException {
 
-		List<Person> res = new ArrayList<Person>();
+		List<Teacher> res = new ArrayList<Teacher>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "SELECT name, family_name FROM teachers WHERE family_name = ?";

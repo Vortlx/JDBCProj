@@ -19,28 +19,41 @@ import jdbcproj.data.group.Group;
 public class Main{
 	public static void main(String[] args){
 
-		DAOGroup conn = new DAOGroup();
+		DAOPerson daoStud = new DAOStudents();
+		DAOGroup daoGroup = new DAOGroup();
 
 		try{
-
-			List<Student> list = new ArrayList<Student>();
-			list.add(new Student("name1", "familyName1", ""));
-			list.add(new Student("name2", "familyName2", ""));
-			list.add(new Student("name3", "familyName3", ""));
-			list.add(new Student("name4", "familyName4", ""));
-			list.add(new Student("name5", "familyName5", ""));
+			Student newStudent1 = new Student("test1", "test1", "141");
+			Student newStudent2 = new Student("test2", "test2", "141");
+			Student newStudent3 = new Student("test3", "test3", "141");
 			
-			Group group = new Group("testGroup", list);
+			daoStud.delete(newStudent1);
+			daoStud.delete(newStudent2);
+			daoStud.delete(newStudent3);
 			
-			conn.delete(group.getName());
-			conn.add(group);
+			daoStud.add(newStudent1);
+			daoStud.add(newStudent2);
+			daoStud.add(newStudent3);
 			
-			Group test = conn.getByName("testGroup");
-			System.out.println("Group name is " + test.getName());
-			System.out.println();
-			System.out.println("Students:");
-			for(Student i: test.getStudents()){
-				System.out.println(i.getName() + " " + i.getFamilyName());
+			Group group = daoGroup.getByName("141");
+			int idx = 1;
+			System.out.println(group.getName());
+			System.out.println("Students: ");
+			for(Student i : group.getStudents()){
+				System.out.println((idx++) + " " + i.getName() + " " + i.getFamilyName());
+			}
+			System.out.println("\n=======================================\n\n");
+			
+			daoStud.delete(newStudent1);
+			daoStud.delete(newStudent2);
+			daoStud.delete(newStudent3);
+			
+			group = daoGroup.getByName("141");
+			idx = 1;
+			System.out.println(group.getName());
+			System.out.println("Students: ");
+			for(Student i : group.getStudents()){
+				System.out.println((idx++) + " " + i.getName() + " " + i.getFamilyName());
 			}
 			
 		}catch(SQLException e){
