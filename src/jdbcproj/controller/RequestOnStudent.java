@@ -17,7 +17,7 @@ import jdbcproj.data.person.Student;
 
 public class RequestOnStudent extends HttpServlet{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2387567823658L;
 	
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -35,6 +35,8 @@ public class RequestOnStudent extends HttpServlet{
 				list = connToStudent.getByName(name);
 			} else if("".equals(name) && !"".equals(familyName)){
 				list = connToStudent.getByFamilyName(familyName);
+			}else{
+				list = connToStudent.getStudent(name, familyName);
 			}
 			
 			req.setAttribute("students", list);
