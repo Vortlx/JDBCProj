@@ -35,11 +35,10 @@ public class DAOStudents implements DAOPerson{
 	/**
 	 * This method insert data into students table.
 	 * 
-	 *  @see DAOPerson#add(String, String)
+	 *  @see DAOPerson#add(Person person)
 	 *  
-	 *  @param name Name of student.
-	 *  @param familyName Family name of student.
-	 *  @throw SQLException
+	 *  @param person Person who will added in students table
+	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
 	@Override
@@ -87,13 +86,11 @@ public class DAOStudents implements DAOPerson{
 	/**
 	 * This method update data into students table.
 	 * 
-	 * @see DAOPerson#update(String, String, String, String)
+	 * @see DAOPerson#update(Person oldPerson, Person newPerson)
 	 * 
-	 * @param name Old name of student.
-	 * @param familyName Old family name of student.
-	 * @param newName New name of student.
-	 * @param newFamilyName New family name of student.
-	 * @throw SQLException
+	 * @param oldPerson Person who was in table
+	 * @param newPerson Person who replace old person
+	 * @throws SQLException
 	 * @return Nothing.
 	 * */
 	@Override
@@ -116,11 +113,10 @@ public class DAOStudents implements DAOPerson{
 	/**
 	 * This method delete data from students table.
 	 * 
-	 * @see DAOPerson#delete(String, String)
+	 * @see DAOPerson#delete(Person person)
 	 * 
-	 * @param name Name of student.
-	 * @param familyName Family name of student.
-	 * @throw SQLException
+	 * @param person Person who will deleted from students table
+	 * @throws SQLException
 	 * @return Nothing
 	 * */
 	@Override
@@ -141,94 +137,138 @@ public class DAOStudents implements DAOPerson{
 	/**
 	 * This method return list of all students.
 	 * 
-	 * @see DAOPerson#getAll()
-	 * 
-	 * @throw SQLException
+	 * @throws SQLException
 	 * @return List of persons
 	 * */
 	public List<Student> getAll() throws SQLException {
-		
-		List<Student> res = new ArrayList<Student>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM students";
+
+		List<Student> res = new ArrayList<Student>();
+
+		String query = "SELECT students.name, students.family_name, groups.name " +
+				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
+				"WHERE students.id = student_in_group.id_student" +
+				"AND groups.id = student_in_group.id_group";
 		PreparedStatement statement = conn.prepareStatement(query);
+
 		ResultSet rs = statement.executeQuery();
-		
 		while(rs.next()){
-			String name = rs.getString("name");
-			String familyName = rs.getString("family_name");
-			
-			res.add(new Student(name, familyName, ""));
+			String name = rs.getString(1);
+			String familyName = rs.getString(2);
+			String group = rs.getString(3);
+			res.add(new Student(name, familyName, group));
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
+
 		return res;
 	}
 
 	/**
 	 * This method return list of all students who have a specific name.
-	 * 
-	 * @see DAOPerson#getByName(String)
-	 * 
+	 *
 	 * @param name Name of student for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific name
+	 * @throws SQLException
+	 * @return List of students who have a specific name
 	 * */
 	public List<Student> getByName(String name) throws SQLException {
 
-		List<Student> res = new ArrayList<Student>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM students WHERE name = ?";
+
+		List<Student> res = new ArrayList<Student>();
+
+		String query = "SELECT students.name, students.family_name, groups.name " +
+				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
+				"WHERE students.name = ? " +
+				"AND students.id = student_in_group.id_student" +
+				"AND groups.id = student_in_group.id_group";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, name);
+
 		ResultSet rs = statement.executeQuery();
-		
 		while(rs.next()){
-			name = rs.getString("name");
-			String familyName = rs.getString("family_name");
-			
-			res.add(new Student(name, familyName, ""));
+			String familyName = rs.getString(2);
+			String group = rs.getString(3);
+			res.add(new Student(name, familyName, group));
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
+
 		return res;
 	}
 
 	/**
 	 * This method return list of all students who have a specific family name.
 	 * 
-	 * @see DAOPerson#getByFamilyName(String)
-	 * 
 	 * @param familyName Family name of student for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific family name
+	 * @throws SQLException
+	 * @return List of students who have a specific family name
 	 * */
 	public List<Student> getByFamilyName(String familyName) throws SQLException {
 
-		List<Student> res = new ArrayList<Student>();
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM students WHERE family_name = ?";
+
+		List<Student> res = new ArrayList<Student>();
+
+		String query = "SELECT students.name, students.family_name, groups.name " +
+				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
+				"WHERE students.family_name = ? " +
+				"AND students.id = student_in_group.id_student" +
+				"AND groups.id = student_in_group.id_group";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, familyName);
+
 		ResultSet rs = statement.executeQuery();
-		
 		while(rs.next()){
-			String name = rs.getString("name");
-			familyName = rs.getString("family_name");
-			
-			res.add(new Student(name, familyName, ""));
+			String name = rs.getString(1);
+			String group = rs.getString(3);
+			res.add(new Student(name, familyName, group));
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
+
+		return res;
+	}
+
+	/**
+	 * Method return list of students who have specific name and specific family name
+	 *
+	 * @param name Name of student
+	 * @param familyName Family name of student
+	 * @throws SQLException
+	 * @return List of students who have specific name and specific family name
+	 * */
+	public List<Student> getStudent(String name, String familyName) throws SQLException{
+
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+
+		List<Student> res = new ArrayList<Student>();
+
+		String query = "SELECT students.name, students.family_name, groups.name " +
+							"FROM students INNER JOIN groups INNER JOIN student_in_group" +
+							"WHERE students.name = ? AND students.family_name = ?" +
+							"AND students.id = student_in_group.id_student" +
+							"AND groups.id = student_in_group.id_group";
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setString(1, name);
+		statement.setString(2, familyName);
+
+		ResultSet rs = statement.executeQuery();
+		while(rs.next()){
+			String group = rs.getString(3);
+			res.add(new Student(name, familyName, group));
+		}
+
+		rs.close();
+		statement.close();
+		conn.close();
+
 		return res;
 	}
 }

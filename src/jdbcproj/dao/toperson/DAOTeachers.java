@@ -34,12 +34,11 @@ public class DAOTeachers implements DAOPerson {
 	
 	/**
 	 * This method insert data into teachers table.
-	 * 
-	 *  @see DAOPerson#add(String, String)
-	 *  
-	 *  @param name Name of teacher.
-	 *  @param familyName Family name of teacher.
-	 *  @throw SQLException
+	 *
+	 *  @see DAOPerson#add(Person person)
+	 *
+	 *  @param person Person who will added in teachers table
+	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
 	@Override
@@ -94,14 +93,12 @@ public class DAOTeachers implements DAOPerson {
 
 	/**
 	 * This method update data into teachers table.
-	 * 
-	 * @see DAOPerson#update(String, String, String, String)
-	 * 
-	 * @param name Old name of teacher.
-	 * @param familyName Old family name of teacher.
-	 * @param newName New name of teacher.
-	 * @param newFamilyName New family name of teacher.
-	 * @throw SQLException
+	 *
+	 * @see DAOPerson#update(Person oldPerson, Person newPerson)
+	 *
+	 * @param oldPerson Person who was in table
+	 * @param newPerson Person who replace old person
+	 * @throws SQLException
 	 * @return Nothing.
 	 * */
 	@Override
@@ -123,12 +120,11 @@ public class DAOTeachers implements DAOPerson {
 
 	/**
 	 * This method delete data from teachers table.
-	 * 
-	 * @see DAOPerson#delete(String, String)
-	 * 
-	 * @param name Name of teacher.
-	 * @param familyName Family name of teacher.
-	 * @throw SQLException
+	 *
+	 * @see DAOPerson#delete(Person person)
+	 *
+	 * @param person Person who will deleted from teachers table
+	 * @throws SQLException
 	 * @return Nothing
 	 * */
 	@Override
@@ -148,95 +144,192 @@ public class DAOTeachers implements DAOPerson {
 
 	/**
 	 * This method return list of all teachers.
-	 * 
-	 * @see DAOPerson#getAll()
-	 * 
-	 * @throw SQLException
-	 * @return List of persons
+	 *
+	 * @throws SQLException
+	 * @return List of teachers
 	 * */
 	public List<Teacher> getAll() throws SQLException {
-		
-		List<Teacher> res = new ArrayList<Teacher>();
+
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM teachers";
-		PreparedStatement statement = conn.prepareStatement(query);
-		ResultSet rs = statement.executeQuery();
-		
+
+		List<Teacher> res = new ArrayList<Teacher>();
+
+		String query = "SELECT id, name, family_name FROM teachers";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+
 		while(rs.next()){
-			String name = rs.getString("name");
-			String familyName = rs.getString("family_name");
-			
-			res.add(new Teacher(name, familyName));
+			String name = rs.getString(2);
+			String familyName = rs.getString(3);
+			int idTeacher = rs.getInt(1);
+			ArrayList<String> groups = new ArrayList<String>();
+
+			String getGroupQuery = "SELECT groups.name " +
+					"FROM groups INNER JOIN curator" +
+					"WHERE curator.id_teacher = ?";
+			PreparedStatement getGroupStatement = conn.prepareStatement(getGroupQuery);
+			getGroupStatement.setInt(1, idTeacher);
+
+			ResultSet getGroupRS = getGroupStatement.executeQuery();
+			while(getGroupRS.next()){
+				String groupName = getGroupRS.getString(1);
+				groups.add(groupName);
+			}
+
+			res.add(new Teacher(name, familyName, groups));
+
+			getGroupRS.close();
+			getGroupStatement.close();
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
 		return res;
 	}
 
 	/**
 	 * This method return list of all teachers who have a specific name.
 	 * 
-	 * @see DAOPerson#getByName(String)
-	 * 
 	 * @param name Name of teacher for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific name
+	 * @throws SQLException
+	 * @return List of teachers who have a specific name
 	 * */
 	public List<Teacher> getByName(String name) throws SQLException {
 
-		List<Teacher> res = new ArrayList<Teacher>();
+
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM teachers WHERE name = ?";
-		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, name);
-		ResultSet rs = statement.executeQuery();
-		
+
+		List<Teacher> res = new ArrayList<Teacher>();
+
+		String query = "SELECT id, name, family_name FROM teachers" +
+				" WHERE name = '" + name +
+				"' AND name = '" + name + "'";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+
 		while(rs.next()){
-			name = rs.getString("name");
-			String familyName = rs.getString("family_name");
-			
-			res.add(new Teacher(name, familyName));
+			String familyName = rs.getString(3);
+			int idTeacher = rs.getInt(1);
+			ArrayList<String> groups = new ArrayList<String>();
+
+			String getGroupQuery = "SELECT groups.name " +
+					"FROM groups INNER JOIN curator" +
+					"WHERE curator.id_teacher = ?";
+			PreparedStatement getGroupStatement = conn.prepareStatement(getGroupQuery);
+			getGroupStatement.setInt(1, idTeacher);
+
+			ResultSet getGroupRS = getGroupStatement.executeQuery();
+			while(getGroupRS.next()){
+				String groupName = getGroupRS.getString(1);
+				groups.add(groupName);
+			}
+
+			res.add(new Teacher(name, familyName, groups));
+
+			getGroupRS.close();
+			getGroupStatement.close();
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
 		return res;
 	}
 
 	/**
 	 * This method return list of all teachers who have a specific family name.
 	 * 
-	 * @see DAOPerson#getByFamilyName(String)
-	 * 
 	 * @param familyName Family name of teacher for whom there is a search
-	 * @throw SQLException
-	 * @return List of person who have a specific family name
+	 * @throws SQLException
+	 * @return List of teachers who have a specific family name
 	 * */
 	public List<Teacher> getByFamilyName(String familyName) throws SQLException {
 
-		List<Teacher> res = new ArrayList<Teacher>();
+
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		String query = "SELECT name, family_name FROM teachers WHERE family_name = ?";
-		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, familyName);
-		ResultSet rs = statement.executeQuery();
-		
+
+		List<Teacher> res = new ArrayList<Teacher>();
+
+		String query = "SELECT id, name, family_name FROM teachers" +
+				" WHERE family_name = '" + familyName + "'";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+
 		while(rs.next()){
-			String name = rs.getString("name");
-			familyName = rs.getString("family_name");
-			
-			res.add(new Teacher(name, familyName));
+			String name = rs.getString(2);
+			int idTeacher = rs.getInt(1);
+			ArrayList<String> groups = new ArrayList<String>();
+
+			String getGroupQuery = "SELECT groups.name " +
+					"FROM groups INNER JOIN curator" +
+					"WHERE curator.id_teacher = ?";
+			PreparedStatement getGroupStatement = conn.prepareStatement(getGroupQuery);
+			getGroupStatement.setInt(1, idTeacher);
+
+			ResultSet getGroupRS = getGroupStatement.executeQuery();
+			while(getGroupRS.next()){
+				String groupName = getGroupRS.getString(1);
+				groups.add(groupName);
+			}
+
+			res.add(new Teacher(name, familyName, groups));
+
+			getGroupRS.close();
+			getGroupStatement.close();
 		}
-		
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
+		return res;
+	}
+
+	/**
+	 * Method return list of teachers who have specific name and specific family name
+	 *
+	 * @param name Name of teacher
+	 * @param familyName Family name of teachers
+	 * @throws SQLException
+	 * @return List of teachers who have specific name and specific family name
+	 * */
+	public List<Teacher> getTeacher(String name, String familyName) throws SQLException{
+
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+
+		List<Teacher> res = new ArrayList<Teacher>();
+
+		String query = "SELECT id, name, family_name FROM teachers" +
+						" WHERE name = '" + name +
+						"' AND family_name = '" + familyName + "'";
+		Statement statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(query);
+
+		while(rs.next()){
+			int idTeacher = rs.getInt(1);
+			ArrayList<String> groups = new ArrayList<String>();
+
+			String getGroupQuery = "SELECT groups.name " +
+										"FROM groups INNER JOIN curator" +
+										"WHERE curator.id_teacher = ?";
+			PreparedStatement getGroupStatement = conn.prepareStatement(getGroupQuery);
+			getGroupStatement.setInt(1, idTeacher);
+
+			ResultSet getGroupRS = getGroupStatement.executeQuery();
+			while(getGroupRS.next()){
+				String groupName = getGroupRS.getString(1);
+				groups.add(groupName);
+			}
+
+			res.add(new Teacher(name, familyName, groups));
+
+			getGroupRS.close();
+			getGroupStatement.close();
+		}
+
+		rs.close();
+		statement.close();
+		conn.close();
 		return res;
 	}
 }
