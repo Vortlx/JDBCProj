@@ -1,7 +1,8 @@
 package jdbcproj.controller;
 
-
+import jdbcproj.dao.togroup.DAOGroup;
 import jdbcproj.dao.toperson.DAOTeachers;
+import jdbcproj.data.group.Group;
 import jdbcproj.data.person.Teacher;
 
 import javax.servlet.RequestDispatcher;
@@ -15,32 +16,31 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestOnTeacher extends HttpServlet {
-    private static final long serialVersionUID = 9878761265153L;
+/**
+ * Created by lebedevas on 09.09.16.
+ */
+public class RequestOnGroup extends HttpServlet {
+
+    private static final long serialVersionUID = 7346289375035L;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOTeachers connToTeacher = new DAOTeachers();
+        DAOGroup connToGroup = new DAOGroup();
 
         String name = req.getParameter("name");
-        String familyName = req.getParameter("familyName");
 
-        List<Teacher> list = new ArrayList<Teacher>();
+        List<Group> list = new ArrayList<Group>();
         try{
-            if("".equals(name) && "".equals(familyName)){
-                list = connToTeacher.getAll();
-            }else if(!"".equals(name) && "".equals(familyName)){
-                list = connToTeacher.getByName(name);
-            } else if("".equals(name) && !"".equals(familyName)){
-                list = connToTeacher.getByFamilyName(familyName);
-            }else{
-                list = connToTeacher.getTeacher(name, familyName);
+            if("".equals(name)){
+                list = connToGroup.getAll();
+            }else if(!"".equals(name)) {
+                Group oneGroup = connToGroup.getByName(name);
+                list.add(oneGroup);
             }
-
-            req.setAttribute("teachers", list);
+            req.setAttribute("groups", list);
         }catch(SQLException e){
-            list.add(new Teacher());
+            list.add(new Group());
         }
 
         ServletContext servletContext = getServletContext();
@@ -52,5 +52,4 @@ public class RequestOnTeacher extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         doGet(req, res);
     }
-
 }

@@ -1,0 +1,31 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>RequestOnStudent</servlet-name>
+        <servlet-class>jdbcproj.controller.RequestOnStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestOnTeacher</servlet-name>
+        <servlet-class>jdbcproj.controller.RequestOnTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RequestOnGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.RequestOnGroup</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RequestOnStudent</servlet-name>
+        <url-pattern>/jsp/FindStudent.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestOnTeacher</servlet-name>
+        <url-pattern>/jsp/FindTeacher.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestOnGroup</servlet-name>
+        <url-pattern>/jsp/FindGroup.jsp</url-pattern>
+    </servlet-mapping>
+</web-app>

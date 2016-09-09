@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Students</title>
+<title>Teachers</title>
 </head>
 <body>
-    <form action="FindStudent.jsp" method="POST">
+    <form action="FindTeacher.jsp" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
@@ -21,13 +21,11 @@
         <tr>
             <th>Name</th>
             <th>Family Name</th>
-            <th>Group</th>
         </tr>
-        <c:forEach items="${students}" var="problem">
+        <c:forEach items="${teachers}" var="problem">
            <tr>      
-               <td>${students.name}</td>
+               <td>${teachers.name}</td>
                <td>${students.familyName}</td>
-               <td>${students.group}</td>
            </tr>
         </c:forEach>
     </table>

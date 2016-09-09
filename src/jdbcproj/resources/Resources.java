@@ -39,4 +39,8 @@ public abstract class Resources {
 	public static String getProperty(String key){
 		return prop.getProperty(key);
 	}
+
+	public static String getProperty(String key, String def){
+		return prop.getProperty(key, def);
+	}
 }

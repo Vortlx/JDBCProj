@@ -45,7 +45,7 @@ public class RequestOnStudent extends HttpServlet{
 		}
 		
 		ServletContext servletContext = getServletContext();
-		RequestDispatcher disp = servletContext.getRequestDispatcher("jsp/students.jsp");
+		RequestDispatcher disp = servletContext.getRequestDispatcher("jsp/StudentsList.jsp");
 		disp.forward(req, res);
 	}
 

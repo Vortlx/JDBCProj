@@ -36,27 +36,6 @@ public class Main{
 			daoStud.add(newStudent2);
 			daoStud.add(newStudent3);
 			
-			Group group = daoGroup.getByName("141");
-			int idx = 1;
-			System.out.println(group.getName());
-			System.out.println("Students: ");
-			for(Student i : group.getStudents()){
-				System.out.println((idx++) + " " + i.getName() + " " + i.getFamilyName());
-			}
-			System.out.println("\n=======================================\n\n");
-			
-			daoStud.delete(newStudent1);
-			daoStud.delete(newStudent2);
-			daoStud.delete(newStudent3);
-			
-			group = daoGroup.getByName("141");
-			idx = 1;
-			System.out.println(group.getName());
-			System.out.println("Students: ");
-			for(Student i : group.getStudents()){
-				System.out.println((idx++) + " " + i.getName() + " " + i.getFamilyName());
-			}
-
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
