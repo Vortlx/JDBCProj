@@ -10,6 +10,7 @@ import jdbcproj.data.person.Person;
 import jdbcproj.data.person.Student;
 import jdbcproj.data.group.Group;
 
+import jdbcproj.controller.*;
 
 /**
  * This Class using for testing other classes.

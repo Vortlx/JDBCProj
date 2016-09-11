@@ -19,7 +19,7 @@ public abstract class Resources {
 	
 	static{
 		try{
-			file = new File("./resources/JDBCInfo.properties");
+			file = new File("C:\\apache-tomcat-9.0.0.M8\\webapps\\JDBCProj\\WEB-INF\\resources\\JDBCInfo.properties");
 			inProp = new FileInputStream(file);
 			prop = new Properties();
 			

@@ -40,11 +40,11 @@ public class RequestOnTeacher extends HttpServlet {
 
             req.setAttribute("teachers", list);
         }catch(SQLException e){
-            list.add(new Teacher());
+        	e.printStackTrace();
         }
 
         ServletContext servletContext = getServletContext();
-        RequestDispatcher disp = servletContext.getRequestDispatcher("jsp/teachers.jsp");
+        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/TeachersList.jsp");
         disp.forward(req, res);
     }
 

@@ -105,14 +105,14 @@ public class DAOGroup {
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "SELECT students.name, students.family_name, tmp.name "
-							+ "FROM students INNER JOIN ("
-							+ "SELECT student_in_group.id_student, groups.name "
-							+ "FROM groups INNER JOIN student_in_group "
-							+ "WHERE groups.id = student_in_group.id_group AND groups.name = '" + name + "') AS tmp "
-							+ "WHERE tmp.id_student = students.id";
+						+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+						+ "FROM groups INNER JOIN student_in_group "
+						+ "WHERE groups.name = ? AND groups.id = student_in_group.id_group) AS tmp "
+						+ "WHERE students.id = tmp.id_student";
 		
-		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery(query);
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setString(1, name);
+		ResultSet rs = statement.executeQuery();
 		
 		String groupName = "";
 		List<Student> students = new ArrayList<Student>();

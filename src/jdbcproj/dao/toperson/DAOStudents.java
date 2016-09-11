@@ -145,10 +145,11 @@ public class DAOStudents implements DAOPerson{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, groups.name " +
-				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
-				"WHERE students.id = student_in_group.id_student" +
-				"AND groups.id = student_in_group.id_group";
+		String query = "SELECT students.name, students.family_name, tmp.name "
+				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+				+ "FROM groups INNER JOIN student_in_group "
+				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
+				+ "WHERE students.id = tmp.id_student";
 		PreparedStatement statement = conn.prepareStatement(query);
 
 		ResultSet rs = statement.executeQuery();
@@ -179,11 +180,12 @@ public class DAOStudents implements DAOPerson{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, groups.name " +
-				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
-				"WHERE students.name = ? " +
-				"AND students.id = student_in_group.id_student" +
-				"AND groups.id = student_in_group.id_group";
+		String query = "SELECT students.name, students.family_name, tmp.name "
+				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+				+ "FROM groups INNER JOIN student_in_group "
+				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
+				+ "WHERE students.id = tmp.id_student "
+				+ "AND students.name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, name);
 
@@ -214,11 +216,12 @@ public class DAOStudents implements DAOPerson{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, groups.name " +
-				"FROM students INNER JOIN groups INNER JOIN student_in_group" +
-				"WHERE students.family_name = ? " +
-				"AND students.id = student_in_group.id_student" +
-				"AND groups.id = student_in_group.id_group";
+		String query = "SELECT students.name, students.family_name, tmp.name "
+				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+				+ "FROM groups INNER JOIN student_in_group "
+				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
+				+ "WHERE students.id = tmp.id_student "
+				+ "AND students.family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, familyName);
 
@@ -250,11 +253,12 @@ public class DAOStudents implements DAOPerson{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, groups.name " +
-							"FROM students INNER JOIN groups INNER JOIN student_in_group" +
-							"WHERE students.name = ? AND students.family_name = ?" +
-							"AND students.id = student_in_group.id_student" +
-							"AND groups.id = student_in_group.id_group";
+		String query = "SELECT students.name, students.family_name, tmp.name "
+				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+				+ "FROM groups INNER JOIN student_in_group "
+				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
+				+ "WHERE students.id = tmp.id_student "
+				+ "AND students.name = ? AND students.family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, name);
 		statement.setString(2, familyName);

@@ -1,0 +1,5 @@
+1. Used absolute path for properties file.
+
+2. Unsuported character encoding utf-8 for database.
+
+3. For search not used regular expression.

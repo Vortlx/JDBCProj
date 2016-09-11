@@ -38,14 +38,14 @@ public class RequestOnStudent extends HttpServlet{
 			}else{
 				list = connToStudent.getStudent(name, familyName);
 			}
-			
+		
 			req.setAttribute("students", list);
 		}catch(SQLException e){
-			list.add(new Student());
+			e.printStackTrace();
 		}
-		
+
 		ServletContext servletContext = getServletContext();
-		RequestDispatcher disp = servletContext.getRequestDispatcher("jsp/StudentsList.jsp");
+		RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/StudentsList.jsp");
 		disp.forward(req, res);
 	}
 

@@ -40,11 +40,11 @@ public class RequestOnGroup extends HttpServlet {
             }
             req.setAttribute("groups", list);
         }catch(SQLException e){
-            list.add(new Group());
+            e.printStackTrace();
         }
 
         ServletContext servletContext = getServletContext();
-        RequestDispatcher disp = servletContext.getRequestDispatcher("jsp/teachers.jsp");
+        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/GroupsList.jsp");
         disp.forward(req, res);
     }
 

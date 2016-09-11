@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf8"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 <title>Teachers</title>
 </head>
 <body>
@@ -21,12 +22,16 @@
         <tr>
             <th>Name</th>
             <th>Family Name</th>
+            <th>Group</th>
         </tr>
-        <c:forEach items="${teachers}" var="problem">
-           <tr>      
-               <td>${teachers.name}</td>
-               <td>${students.familyName}</td>
-           </tr>
+        <c:forEach items="${teachers}" var="teacher">
+           <c:forEach items="${teacher.groups}" var="group">
+            <tr>
+                <td>${teacher.name}</td>
+                <td>${teacher.familyName}</td>
+                <td>${group}</td>
+            </tr>
+           </c:forEach>
         </c:forEach>
     </table>
 </body>
