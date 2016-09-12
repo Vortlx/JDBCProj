@@ -26,17 +26,25 @@
         </tr>
         <c:forEach items="${teachers}" var="teacher">
            <tr>
-            <td rowspan="${teacher.groups.size()}">${teacher.name}</td>
-            <td rowspan="${teacher.groups.size()}">${teacher.familyName}</td>
-            <c:if test="${teacher.groups.size() == 0}">
-                <td></td>
-                </tr>
-            </c:if>
-            <c:forEach items="${teacher.groups}" var="group">
+           <c:choose>
+               <c:when test="${teacher.groups.size() == 0}">
+                    <td>${teacher.name}</td>
+                    <td>${teacher.familyName}</td>
+                    <td> </td>
+                    </tr>
+               </c:when>
+               <c:when test="${teacher.groups.size() > 0}">
+                    <td rowspan="${teacher.groups.size()}">${teacher.name}</td>
+                    <td rowspan="${teacher.groups.size()}">${teacher.familyName}</td>
+               </c:when>
+           </c:choose>
+
+           <c:forEach items="${teacher.groups}" var="group">
                 <td>${group}</td>
                 </tr>
-            </c:forEach>
-            </tr>        
+
+                <tr>
+           </c:forEach>
         </c:forEach>
     </table>
 </body>

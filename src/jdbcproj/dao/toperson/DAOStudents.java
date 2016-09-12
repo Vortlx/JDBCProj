@@ -43,46 +43,59 @@ public class DAOStudents implements DAOPerson{
 	 * */
 	@Override
 	public void add(String name, String familyName, String... groups) throws SQLException {
-		
-		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
+
 		if(groups.length == 0){
 			return;
 		}
+
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		Student student = new Student(name, familyName, groups[0]);
-		String query = "INSERT INTO students (name, family_name) VALUES (?, ?)";
+
+		int groupID = - 1;
+		int studentID = -1;
+
+		String query = "SELECT id FROM groups WHERE name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setString(1, student.getGroup());
+		ResultSet rs = statement.executeQuery();
+		if(rs.next()){
+			groupID = rs.getInt(1);
+		}else{
+			rs.close();
+			statement.close();
+			conn.close();
+			throw (new SQLException());
+		}
+
+		rs.close();
+		statement.close();
+
+		query = "INSERT INTO students (name, family_name) VALUES(?, ?)";
+		statement = conn.prepareStatement(query);
 		statement.setString(1, student.getName());
 		statement.setString(2, student.getFamilyName());
 		statement.executeUpdate();
 		statement.close();
-		
-		int studentID = -1;
-		int groupID = -1;
-		
-		Statement getIDStatement = conn.createStatement();
-		String studentIDQuery = "SELECT id FROM students WHERE name = '" + student.getName()
-									+ "' AND family_name = '" + student.getFamilyName() + "'";
-		ResultSet rs = getIDStatement.executeQuery(studentIDQuery);
+
+		query = "SELECT id FROM students WHERE name = ? AND family_name = ?";
+		statement = conn.prepareStatement(query);
+		statement.setString(1, student.getName());
+		statement.setString(2, student.getFamilyName());
+		rs = statement.executeQuery();
 		if(rs.next()){
 			studentID = rs.getInt(1);
 		}
-		
-		
-		String groupIDQuery = "SELECT id FROM groups WHERE name = '" + student.getGroup() + "'";
-		rs = getIDStatement.executeQuery(groupIDQuery);
-		if(rs.next()){
-			groupID = rs.getInt(1);
-		}
+
 		rs.close();
-		
-		query = "INSERT INTO student_in_group (id_student, id_group) VALUES (?, ?)";
+		statement.close();
+
+		query = "INSERT INTO student_in_group (id_group, id_student) VALUES(?, ?)";
 		statement = conn.prepareStatement(query);
-		statement.setInt(1, studentID);
-		statement.setInt(2, groupID);
+		statement.setInt(1, groupID);
+		statement.setInt(2, studentID);
 		statement.executeUpdate();
-		
+
 		statement.close();
 		conn.close();
 	}

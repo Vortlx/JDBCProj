@@ -24,16 +24,23 @@
         </tr>
         <c:forEach items="${groups}" var="group">
             <tr>
-                <td rowspan="${group.students.size()}">${group.name}</td>
-                <c:if test="${group.students.size() == 0}">
-                    <td></td>
-                    <td></td>
-                    </tr>
-                </c:if>
+                <c:choose>
+                    <c:when test="${group.students.size() > 0}">
+                        <td rowspan="${group.students.size()}">${group.name}</td>
+                    </c:when>
+                    <c:when test="${group.students.size() == 0}">
+                        <td>${group.name}</td>
+                        <td> </td>
+                        <td> </td>
+                        </tr>
+                    </c:when>
+                </c:choose>
                 <c:forEach items="${group.students}" var="student">
                     <td>${student.name}</td>
                     <td>${student.familyName}</td>
                     </tr>
+
+                    <tr>
                 </c:forEach>
         </c:forEach>
     </table>
