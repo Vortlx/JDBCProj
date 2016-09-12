@@ -39,11 +39,11 @@ public class DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void add(Group group) throws SQLException{
+	public void add(String name) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "INSERT INTO groups (name) VALUES ('" + group.getName() + "')";
+		String query = "INSERT INTO groups (name) VALUES ('" + name + "')";
 		Statement statement = conn.createStatement();
 		statement.executeUpdate(query);
 		
@@ -104,29 +104,37 @@ public class DAOGroup {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "SELECT students.name, students.family_name, tmp.name "
-						+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
-						+ "FROM groups INNER JOIN student_in_group "
-						+ "WHERE groups.name = ? AND groups.id = student_in_group.id_group) AS tmp "
-						+ "WHERE students.id = tmp.id_student";
+		String query = "SELECT id FROM groups "
+						+ "WHERE name = ?";
 		
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, name);
 		ResultSet rs = statement.executeQuery();
+
 		
-		String groupName = "";
-		List<Student> students = new ArrayList<Student>();
+		Group res = new Group(name);
 		
-		while(rs.next()){
-			groupName = rs.getString("tmp.name");
+		if(rs.next()){
+			int groupID = rs.getInt(1);
 			
-			String studentName = rs.getString("students.name");
-			String studentFamilyName = rs.getString("students.family_name");
+			query = "SELECT students.name, students.family_name "
+					+ "FROM students INNER JOIN student_in_group "
+					+ "WHERE students.id = student_in_group.id_student "
+					+ "AND student_in_group.id_group = ?";
+			PreparedStatement studStat = conn.prepareStatement(query);
+			studStat.setInt(1, groupID);
+			ResultSet studentsRS = studStat.executeQuery();
 			
-			students.add(new Student(studentName, studentFamilyName, groupName));
+			while(studentsRS.next()){
+				String studentName = studentsRS.getString(1);
+				String studentFamilyName = studentsRS.getString(2);
+				
+				res.addStudent(new Student(studentName, studentFamilyName, name));
+			}
+			
+			studentsRS.close();
+			studStat.close();
 		}
-		
-		Group res = new Group(groupName, students);
 		
 		rs.close();
 		statement.close();

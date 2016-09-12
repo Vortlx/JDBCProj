@@ -4,28 +4,81 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>RequestOnStudent</servlet-name>
-        <servlet-class>jdbcproj.controller.RequestOnStudent</servlet-class>
+        <servlet-name>FindStudent</servlet-name>
+        <servlet-class>jdbcproj.controller.search.FindStudent</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RequestOnTeacher</servlet-name>
-        <servlet-class>jdbcproj.controller.RequestOnTeacher</servlet-class>
+        <servlet-name>FindTeacher</servlet-name>
+        <servlet-class>jdbcproj.controller.search.FindTeacher</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RequestOnGroup</servlet-name>
-        <servlet-class>jdbcproj.controller.RequestOnGroup</servlet-class>
+        <servlet-name>FindGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.search.FindGroup</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>DeleteGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.delete.DeleteGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStudent</servlet-name>
+        <servlet-class>jdbcproj.controller.delete.DeleteStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTeacher</servlet-name>
+        <servlet-class>jdbcproj.controller.delete.DeleteTeacher</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AddTeacher</servlet-name>
+        <servlet-class>jdbcproj.controller.add.AddTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStudent</servlet-name>
+        <servlet-class>jdbcproj.controller.add.AddStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.add.AddGroup</servlet-class>
+    </servlet>
+
+
     <servlet-mapping>
-        <servlet-name>RequestOnStudent</servlet-name>
-        <url-pattern>/jsp/FindStudent.jsp</url-pattern>
+        <servlet-name>FindStudent</servlet-name>
+        <url-pattern>/jsp/search/FindStudentServ.jsp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RequestOnTeacher</servlet-name>
-        <url-pattern>/jsp/FindTeacher.jsp</url-pattern>
+        <servlet-name>FindTeacher</servlet-name>
+        <url-pattern>/jsp/search/FindTeacherServ.jsp</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RequestOnGroup</servlet-name>
-        <url-pattern>/jsp/FindGroup.jsp</url-pattern>
+        <servlet-name>FindGroup</servlet-name>
+        <url-pattern>/jsp/search/FindGroupServ.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>DeleteGroup</servlet-name>
+        <url-pattern>/jsp/delete/DeleteGroupServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStudent</servlet-name>
+        <url-pattern>/jsp/delete/DeleteStudentServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTeacher</servlet-name>
+        <url-pattern>/jsp/delete/DeleteTeacherServ.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AddTeacher</servlet-name>
+        <url-pattern>/jsp/add/AddTeacherServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStudent</servlet-name>
+        <url-pattern>/jsp/add/AddStudentServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGroup</servlet-name>
+        <url-pattern>/jsp/add/AddGroupServ.jsp</url-pattern>
     </servlet-mapping>
 </web-app>

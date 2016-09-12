@@ -42,11 +42,15 @@ public class DAOStudents implements DAOPerson{
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(Person person) throws SQLException {
+	public void add(String name, String familyName, String... groups) throws SQLException {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		Student student = (Student) person;
+		if(groups.length == 0){
+			return;
+		}
+		
+		Student student = new Student(name, familyName, groups[0]);
 		String query = "INSERT INTO students (name, family_name) VALUES (?, ?)";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, student.getName());
@@ -94,16 +98,16 @@ public class DAOStudents implements DAOPerson{
 	 * @return Nothing.
 	 * */
 	@Override
-	public void update(Person oldPerson, Person newPerson) throws SQLException {
+	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "UPDATE students SET name = ?, family_name = ? WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(3, oldPerson.getName());
-		statement.setString(4, oldPerson.getFamilyName());
-		statement.setString(1, newPerson.getName());
-		statement.setString(2, newPerson.getFamilyName());
+		statement.setString(3, oldName);
+		statement.setString(4, oldFamilyName);
+		statement.setString(1, newName);
+		statement.setString(2, newFamilyName);
 		statement.executeUpdate();
 		
 		statement.close();
@@ -120,14 +124,14 @@ public class DAOStudents implements DAOPerson{
 	 * @return Nothing
 	 * */
 	@Override
-	public void delete(Person person) throws SQLException {
+	public void delete(String name, String familyName) throws SQLException {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "DELETE FROM students WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, person.getName());
-		statement.setString(2, person.getFamilyName());
+		statement.setString(1, name);
+		statement.setString(2, familyName);
 		statement.executeUpdate();
 		
 		statement.close();

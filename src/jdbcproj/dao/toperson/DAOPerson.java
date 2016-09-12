@@ -1,8 +1,5 @@
 package jdbcproj.dao.toperson;
 
-import java.util.List;
-
-import jdbcproj.data.person.Person;
 
 import java.sql.SQLException;
 
@@ -22,7 +19,7 @@ public interface DAOPerson {
 	 *  @throw SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(Person person) throws SQLException ;
+	public void add(String name, String familyName, String... groups) throws SQLException ;
 	
 	/**
 	 * This method update data into person table. For example into students.
@@ -34,7 +31,7 @@ public interface DAOPerson {
 	 * @throw SQLException
 	 * @return Nothing.
 	 * */
-	public void update(Person oldPerson, Person newPerson) throws SQLException ;
+	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException ;
 	
 	/**
 	 * This method delete data from person table. For example from students.
@@ -44,5 +41,5 @@ public interface DAOPerson {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void delete(Person person) throws SQLException ;
+	public void delete(String name, String familyName) throws SQLException ;
 }

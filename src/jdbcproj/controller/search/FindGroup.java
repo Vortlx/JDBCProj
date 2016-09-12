@@ -1,9 +1,7 @@
-package jdbcproj.controller;
+package jdbcproj.controller.search;
 
 import jdbcproj.dao.togroup.DAOGroup;
-import jdbcproj.dao.toperson.DAOTeachers;
 import jdbcproj.data.group.Group;
-import jdbcproj.data.person.Teacher;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,7 +17,7 @@ import java.util.List;
 /**
  * Created by lebedevas on 09.09.16.
  */
-public class RequestOnGroup extends HttpServlet {
+public class FindGroup extends HttpServlet {
 
     private static final long serialVersionUID = 7346289375035L;
 
@@ -44,7 +42,7 @@ public class RequestOnGroup extends HttpServlet {
         }
 
         ServletContext servletContext = getServletContext();
-        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/GroupsList.jsp");
+        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/search/GroupsSearch.jsp");
         disp.forward(req, res);
     }
 

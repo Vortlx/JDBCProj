@@ -1,4 +1,4 @@
-package jdbcproj.controller;
+package jdbcproj.controller.search;
 
 
 import jdbcproj.dao.toperson.DAOTeachers;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestOnTeacher extends HttpServlet {
+public class FindTeacher extends HttpServlet {
     private static final long serialVersionUID = 9878761265153L;
 
     @Override
@@ -44,7 +44,7 @@ public class RequestOnTeacher extends HttpServlet {
         }
 
         ServletContext servletContext = getServletContext();
-        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/TeachersList.jsp");
+        RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/search/TeachersSearch.jsp");
         disp.forward(req, res);
     }
 

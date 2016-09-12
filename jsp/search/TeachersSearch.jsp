@@ -5,15 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>Groups</title>
+<title>Search Teachers</title>
 </head>
 <body>
-    <form action="FindGroup.jsp" method="POST">
+    <form action="FindTeacherServ.jsp" method="POST">
         Name: <input name="name" type="text">
+        <br>
+        Family name: <input name="familyName" type="text">
         <br>
         <input name="send" type="submit" value="Find">
     </form>
-    <form action="../index.jsp" method="POST">
+    <form action="Search.jsp" method="POST">
         <input name="back" type="submit" value="Back">
     </form>
     <table border="1">
@@ -22,14 +24,19 @@
             <th>Family Name</th>
             <th>Group</th>
         </tr>
-        <c:forEach items="${groups}" var="group">
-           <c:forEach items="${group.students}" var="student">
-	           <tr>
-	               <td>${student.name}</td>
-	               <td>${student.familyName}</td>
-	               <td>${group.name}</td>
-	           </tr>
-           </c:forEach>
+        <c:forEach items="${teachers}" var="teacher">
+           <tr>
+            <td rowspan="${teacher.groups.size()}">${teacher.name}</td>
+            <td rowspan="${teacher.groups.size()}">${teacher.familyName}</td>
+            <c:if test="${teacher.groups.size() == 0}">
+                <td></td>
+                </tr>
+            </c:if>
+            <c:forEach items="${teacher.groups}" var="group">
+                <td>${group}</td>
+                </tr>
+            </c:forEach>
+            </tr>        
         </c:forEach>
     </table>
 </body>

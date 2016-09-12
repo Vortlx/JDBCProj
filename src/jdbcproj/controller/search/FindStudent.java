@@ -1,4 +1,4 @@
-package jdbcproj.controller;
+package jdbcproj.controller.search;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import jdbcproj.dao.toperson.DAOStudents;
 import jdbcproj.data.person.Student;
 
-public class RequestOnStudent extends HttpServlet{
+public class FindStudent extends HttpServlet{
 
 	private static final long serialVersionUID = 2387567823658L;
 	
@@ -45,7 +45,7 @@ public class RequestOnStudent extends HttpServlet{
 		}
 
 		ServletContext servletContext = getServletContext();
-		RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/StudentsList.jsp");
+		RequestDispatcher disp = servletContext.getRequestDispatcher("/jsp/search/StudentsSearch.jsp");
 		disp.forward(req, res);
 	}
 

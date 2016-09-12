@@ -5,30 +5,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>Students</title>
+<title>Search Students</title>
 </head>
 <body>
-    <form action="FindStudent.jsp" method="POST">
+    <form action="FindStudentServ.jsp" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
         <br>
         <input name="send" type="submit" value="Find">
     </form>
-    <form action="../index.jsp" method="POST">
+    <form action="Search.jsp" method="POST">
         <input name="back" type="submit" value="Back">
     </form>
     <table border="1">
         <tr>
+            <th>Group</th>
             <th>Name</th>
             <th>Family Name</th>
-            <th>Group</th>
         </tr>
         <c:forEach items="${students}" var="student">
            <tr>      
+               <td>${student.group}</td>
                <td>${student.name}</td>
                <td>${student.familyName}</td>
-               <td>${student.group}</td>
            </tr>
         </c:forEach>
     </table>

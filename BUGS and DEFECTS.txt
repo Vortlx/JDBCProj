@@ -3,3 +3,5 @@
 2. Unsuported character encoding utf-8 for database.
 
 3. For search not used regular expression.
+
+4. UI with bugs for search department.

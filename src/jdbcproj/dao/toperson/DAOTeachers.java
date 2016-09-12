@@ -42,11 +42,16 @@ public class DAOTeachers implements DAOPerson {
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(Person person) throws SQLException {
+	public void add(String name, String familyName, String... groups) throws SQLException {
 		
-		Teacher teacher = (Teacher) person;
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
+		Teacher teacher = new Teacher(name, familyName);
+		
+		for(String group: groups){
+			teacher.addGroup(group);
+		}
+
 		String query = "INSERT INTO teachers (name, family_name) VALUES(?, ?)";
 		PreparedStatement statement = conn.prepareStatement(query);
 		statement.setString(1, teacher.getName());
@@ -59,7 +64,6 @@ public class DAOTeachers implements DAOPerson {
 		
 		// Get teacher ID
 		int teacherID = -1;
-		List<String> groups = teacher.getGroups();
 		
 		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + teacher.getName() +
 									"' AND family_name = '" + teacher.getFamilyName() + "'";
@@ -86,6 +90,7 @@ public class DAOTeachers implements DAOPerson {
 			
 		}
 		rs.close();
+		getIDTeacher.close();
 		getIDGroup.close();
 		statement.close();
 		conn.close();
@@ -102,16 +107,16 @@ public class DAOTeachers implements DAOPerson {
 	 * @return Nothing.
 	 * */
 	@Override
-	public void update(Person oldPerson, Person newPerson) throws SQLException {
+	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "UPDATE teachers SET name = ?, family_name = ? WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(3, oldPerson.getName());
-		statement.setString(4, oldPerson.getFamilyName());
-		statement.setString(1, newPerson.getName());
-		statement.setString(2, newPerson.getFamilyName());
+		statement.setString(3, oldName);
+		statement.setString(4, oldFamilyName);
+		statement.setString(1, newName);
+		statement.setString(2, newFamilyName);
 		statement.executeUpdate();
 		
 		statement.close();
@@ -128,14 +133,14 @@ public class DAOTeachers implements DAOPerson {
 	 * @return Nothing
 	 * */
 	@Override
-	public void delete(Person person) throws SQLException {
+	public void delete(String name, String familyName) throws SQLException {
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "DELETE FROM teachers WHERE name = ? AND family_name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, person.getName());
-		statement.setString(2, person.getFamilyName());
+		statement.setString(1, name);
+		statement.setString(2, familyName);
 		statement.executeUpdate();
 		
 		statement.close();

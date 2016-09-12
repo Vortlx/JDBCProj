@@ -23,20 +23,22 @@ public class Main{
 
 		DAOPerson daoStud = new DAOStudents();
 		DAOGroup daoGroup = new DAOGroup();
+		DAOTeachers daoTeacher = new DAOTeachers();
 
 		try{
-			Student newStudent1 = new Student("test1", "test1", "141");
-			Student newStudent2 = new Student("test2", "test2", "141");
-			Student newStudent3 = new Student("test3", "test3", "141");
 			
-			daoStud.delete(newStudent1);
-			daoStud.delete(newStudent2);
-			daoStud.delete(newStudent3);
+			daoStud.delete("test1", "test1");
+			daoStud.add("test1", "test1", "141");
 			
-			daoStud.add(newStudent1);
-			daoStud.add(newStudent2);
-			daoStud.add(newStudent3);
-			
+			daoGroup.delete("testGroup1");
+			daoGroup.delete("testGroup2");
+			daoGroup.delete("testGroup3");
+			daoGroup.add("testGroup1");
+			daoGroup.add("testGroup2");
+			daoGroup.add("testGroup3");
+
+			daoTeacher.delete("test1", "test1");
+			daoTeacher.add("test1", "test1");
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
