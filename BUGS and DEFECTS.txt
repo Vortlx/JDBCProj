@@ -3,3 +3,5 @@
 2. Unsuported character encoding utf-8 for database.
 
 3. For search not used regular expression.
+
+4. In DAO sources not perform DRY. For example in DAOTeacher.deleteCurator method.
