@@ -23,6 +23,7 @@
             <th>Name</th>
             <th>Family Name</th>
             <th>Group</th>
+            <th> </th>
         </tr>
         <c:forEach items="${teachers}" var="teacher">
            <tr>
@@ -39,6 +40,14 @@
 
                <c:forEach items="${teacher.groups}" var="group">
                     <td>${group}</td>
+                    <td>
+                        <form action="../delete/DeleteCuratorServ.jsp" method="POST">
+                            <input name="teacherName" type="hidden" value="${teacher.name}">
+                            <input name="teacherFamilyName" type="hidden" value="${teacher.familyName}">
+                            <input name="groupName" type="hidden" value="${group}">
+                            <input name="delete" type="submit" value="Delete"/>
+                        </form>
+                    </td>
                     </tr>
 
                     <tr>

@@ -28,6 +28,10 @@
         <servlet-name>DeleteTeacher</servlet-name>
         <servlet-class>jdbcproj.controller.delete.DeleteTeacher</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteCurator</servlet-name>
+        <servlet-class>jdbcproj.controller.delete.DeleteCurator</servlet-class>
+    </servlet>
 
     <servlet>
         <servlet-name>AddTeacher</servlet-name>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>DeleteTeacher</servlet-name>
         <url-pattern>/jsp/delete/DeleteTeacherServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCurator</servlet-name>
+        <url-pattern>/jsp/delete/DeleteCuratorServ.jsp</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

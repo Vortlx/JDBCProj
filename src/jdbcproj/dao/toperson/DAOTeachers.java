@@ -196,6 +196,56 @@ public class DAOTeachers implements DAOPerson {
 		conn.close();
 	}
 
+	public void deleteCurator(String name, String familyName, String groupName) throws SQLException{
+
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+
+		int teacherID = -1;
+		int groupID = -1;
+
+		String getTeacherIDQuery = "SELECT id FROM teachers " +
+				"WHERE name = '" + name + "' AND family_name = '" + familyName + "'";
+		Statement getTeacherIDStat = conn.createStatement();
+		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
+		if(teacherRS.next()){
+			teacherID = teacherRS.getInt(1);
+		}else{
+			teacherRS.close();
+			getTeacherIDStat.close();
+			conn.close();
+
+			throw (new SQLException());
+		}
+		teacherRS.close();
+		getTeacherIDStat.close();
+
+		String getGroupIDQuery = "SELECT id FROM groups " +
+				"WHERE name = '" + groupName + "'";
+		Statement getGroupIDStat = conn.createStatement();
+		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
+		if(groupRS.next()){
+			groupID = groupRS.getInt(1);
+		}else{
+			groupRS.close();
+			getGroupIDStat.close();
+			conn.close();
+
+			throw (new SQLException());
+		}
+		groupRS.close();
+		getGroupIDStat.close();
+
+		String query = "DELETE FROM curator " +
+						"WHERE id_group = ? AND id_teacher = ?";
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setInt(1, groupID);
+		statement.setInt(2, teacherID);
+		statement.executeUpdate();
+
+		statement.close();
+		conn.close();
+	}
+
 	/**
 	 * This method return list of all teachers who have a specific name.
 	 * 

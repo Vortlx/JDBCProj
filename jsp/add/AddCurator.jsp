@@ -8,10 +8,6 @@
 <title>Add Group</title>
 </head>
 <body>
-    ${param.teacherName}
-    <br>
-    ${param.teacherFamilyName}
-    <br>
     <form action="AddCuratorServ.jsp" method="POST">
         <input name="teacherName" type="hidden" value="${param.teacherName}">
         <input name="teacherFamilyName" type="hidden" value="${param.teacherFamilyName}">
