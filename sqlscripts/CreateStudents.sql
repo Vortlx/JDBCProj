@@ -5,5 +5,4 @@
 	
 	PRIMARY KEY (id),
 	CONSTRAINT unique_student UNIQUE(name, family_name)
-) CHARACTER SET = utf8;
-
+) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;

@@ -5,4 +5,4 @@
 	PRIMARY KEY (id_group, id_student),
 	FOREIGN KEY (id_group) REFERENCES groups(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (id_student) REFERENCES students(id) ON DELETE CASCADE ON UPDATE CASCADE
-) CHARACTER SET = utf8;
+) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;

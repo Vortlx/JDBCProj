@@ -41,6 +41,10 @@
         <servlet-name>AddGroup</servlet-name>
         <servlet-class>jdbcproj.controller.add.AddGroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddCurator</servlet-name>
+        <servlet-class>jdbcproj.controller.add.AddCurator</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -80,5 +84,9 @@
     <servlet-mapping>
         <servlet-name>AddGroup</servlet-name>
         <url-pattern>/jsp/add/AddGroupServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCurator</servlet-name>
+        <url-pattern>/jsp/add/AddCuratorServ.jsp</url-pattern>
     </servlet-mapping>
 </web-app>

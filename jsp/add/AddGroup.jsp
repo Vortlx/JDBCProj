@@ -12,7 +12,7 @@
         <br>
         <input name="add" type="submit" value="Add">
     </form>
-    <form action="Add.jsp" mathod="POST">
+    <form action="Add.jsp" method="POST">
         <input name="back" type="submit" value="Back">
     </form>
     <br>
