@@ -45,8 +45,8 @@
                </c:forEach>
                <td>
                    <form action="../add/AddCurator.jsp" method="POST">
-                       <input name="name" type="hidden" value="${teacher.name}">
-                       <input name="familyName" type="hidden" value="${teacher.familyName}">
+                       <input name="teacherName" type="hidden" value="${teacher.name}">
+                       <input name="teacherFamilyName" type="hidden" value="${teacher.familyName}">
                        <input name="add" type="submit" value="Add"/>
                    </form>
                </td>

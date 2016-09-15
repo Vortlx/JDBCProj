@@ -1,6 +1,6 @@
 package jdbcproj.controller.add;
 
-import jdbcproj.dao.togroup.DAOGroup;
+import jdbcproj.dao.toperson.DAOTeachers;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,21 +19,24 @@ public class AddCurator extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
+        DAOTeachers daoTeachers = new DAOTeachers();
+
         try{
-            if(false)
-                throw (new SQLException());
+            String teacherName = req.getParameter("teacherName");
+            String teacherFamilyName = req.getParameter("teacherFamilyName");
+            String groupName = req.getParameter("groupName");
+
+            daoTeachers.addGroup(teacherName, teacherFamilyName, groupName);
 
         }catch(SQLException e){
 
+            e.printStackTrace();
             String message = "Can't do this operation.";
             req.setAttribute("message", message);
 
             RequestDispatcher reqDisp =  req.getRequestDispatcher("/jsp/add/AddCurator.jsp");
             reqDisp.forward(req, res);
         }
-
-
-
 
         RequestDispatcher reqDisp =  req.getRequestDispatcher("/jsp/search/TeachersSearch.jsp");
         reqDisp.forward(req, res);

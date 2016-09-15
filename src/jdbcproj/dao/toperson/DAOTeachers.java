@@ -43,11 +43,11 @@ public class DAOTeachers implements DAOPerson {
 	 * */
 	@Override
 	public void add(String name, String familyName, String... groups) throws SQLException {
-		
+
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
+
 		Teacher teacher = new Teacher(name, familyName);
-		
+
 		for(String group: groups){
 			teacher.addGroup(group);
 		}
@@ -58,13 +58,13 @@ public class DAOTeachers implements DAOPerson {
 		statement.setString(2, teacher.getFamilyName());
 		statement.executeUpdate();
 		statement.close();
-		
+
 		query = "INSERT INTO curator(id_group, id_teacher) VALUES(?, ?)";
 		statement = conn.prepareStatement(query);
-		
+
 		// Get teacher ID
 		int teacherID = -1;
-		
+
 		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + teacher.getName() +
 									"' AND family_name = '" + teacher.getFamilyName() + "'";
 		Statement getIDTeacher = conn.createStatement();
@@ -72,26 +72,75 @@ public class DAOTeachers implements DAOPerson {
 		if(rs.next()){
 			teacherID = rs.getInt(1);
 		}
-		
+
 		//Get group ID
-		String groupIDQuery = "SELECT id FROM groups WHERE name = ?"; 
+		String groupIDQuery = "SELECT id FROM groups WHERE name = ?";
 		PreparedStatement getIDGroup = conn.prepareStatement(groupIDQuery);
 		for(String group: groups){
 			int groupID = -1;
 			getIDGroup.setString(1, group);
-			
 			rs = getIDGroup.executeQuery(groupIDQuery);
+
 			if(rs.next()){
 				groupID = rs.getInt(1);
 			}
-			
+
 			statement.setInt(groupID, teacherID);
 			statement.executeUpdate();
-			
 		}
 		rs.close();
 		getIDTeacher.close();
 		getIDGroup.close();
+		statement.close();
+		conn.close();
+	}
+
+
+	public void addGroup(String name, String familyName, String groupName) throws SQLException{
+
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+
+		int teacherID = -1;
+		int groupID = -1;
+
+		String getTeacherIDQuery = "SELECT id FROM teachers " +
+									"WHERE name = '" + name + "' AND family_name = '" + familyName + "'";
+		Statement getTeacherIDStat = conn.createStatement();
+		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
+		if(teacherRS.next()){
+			teacherID = teacherRS.getInt(1);
+		}else{
+			teacherRS.close();
+			getTeacherIDStat.close();
+			conn.close();
+
+			throw (new SQLException());
+		}
+		teacherRS.close();
+		getTeacherIDStat.close();
+
+		String getGroupIDQuery = "SELECT id FROM groups " +
+									"WHERE name = '" + groupName + "'";
+		Statement getGroupIDStat = conn.createStatement();
+		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
+		if(groupRS.next()){
+			groupID = groupRS.getInt(1);
+		}else{
+			groupRS.close();
+			getGroupIDStat.close();
+			conn.close();
+
+			throw (new SQLException());
+		}
+		groupRS.close();
+		getGroupIDStat.close();
+
+		String query = "INSERT INTO curator(id_group, id_teacher) VALUES(?, ?)";
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setInt(1, groupID);
+		statement.setInt(2, teacherID);
+		statement.executeUpdate();
+
 		statement.close();
 		conn.close();
 	}
