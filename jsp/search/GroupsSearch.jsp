@@ -18,9 +18,9 @@
     </form>
     <table border="1">
         <tr>
+            <th>Group</th>
             <th>Name</th>
             <th>Family Name</th>
-            <th>Group</th>
         </tr>
         <c:forEach items="${groups}" var="group">
             <tr>

@@ -8,27 +8,35 @@
 <title>Search Students</title>
 </head>
 <body>
-    <form action="FindStudentServ.jsp" method="POST">
+    <form action="../search/FindStudentServ.jsp" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
         <br>
         <input name="send" type="submit" value="Find">
     </form>
-    <form action="Search.jsp" method="POST">
+    <form action="../search/Search.jsp" method="POST">
         <input name="back" type="submit" value="Back">
     </form>
     <table border="1">
         <tr>
-            <th>Group</th>
             <th>Name</th>
             <th>Family Name</th>
+            <th>Group</th>
         </tr>
         <c:forEach items="${students}" var="student">
            <tr>      
-               <td>${student.group}</td>
                <td>${student.name}</td>
                <td>${student.familyName}</td>
+               <td>
+                   ${student.group}
+                   <br>
+                   <form action="../update/ChangeGroup.jsp" method="POST">
+                       <input name="studentName" type="hidden" value="${student.name}">
+                       <input name="studentFamilyName" type="hidden" value="${student.familyName}">
+                       <input name="change" type="submit" value="Change">
+                   </form>
+               </td>
            </tr>
         </c:forEach>
     </table>

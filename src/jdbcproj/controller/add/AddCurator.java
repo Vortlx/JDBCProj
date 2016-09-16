@@ -29,8 +29,7 @@ public class AddCurator extends HttpServlet {
             daoTeachers.addGroup(teacherName, teacherFamilyName, groupName);
 
         }catch(SQLException e){
-
-            e.printStackTrace();
+        	e.printStackTrace();
             String message = "Can't do this operation.";
             req.setAttribute("message", message);
 

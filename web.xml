@@ -15,6 +15,10 @@
         <servlet-name>FindGroup</servlet-name>
         <servlet-class>jdbcproj.controller.search.FindGroup</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FindGroupByTeacher</servlet-name>
+        <servlet-class>jdbcproj.controller.search.FindGroupByTeacher</servlet-class>
+    </servlet>
     
     <servlet>
         <servlet-name>DeleteGroup</servlet-name>
@@ -49,6 +53,11 @@
         <servlet-name>AddCurator</servlet-name>
         <servlet-class>jdbcproj.controller.add.AddCurator</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>ChangeGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.update.ChangeGroup</servlet-class>
+    </servlet>
 
 
     <servlet-mapping>
@@ -62,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>FindGroup</servlet-name>
         <url-pattern>/jsp/search/FindGroupServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindGroupByTeacher</servlet-name>
+        <url-pattern>/jsp/search/FindGroupByTeacherServ.jsp</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
@@ -96,5 +109,10 @@
     <servlet-mapping>
         <servlet-name>AddCurator</servlet-name>
         <url-pattern>/jsp/add/AddCuratorServ.jsp</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ChangeGroup</servlet-name>
+        <url-pattern>/jsp/update/ChangeGroupServ.jsp</url-pattern>
     </servlet-mapping>
 </web-app>

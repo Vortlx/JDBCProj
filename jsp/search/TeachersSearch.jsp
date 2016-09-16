@@ -39,7 +39,10 @@
                </c:choose>
 
                <c:forEach items="${teacher.groups}" var="group">
-                    <td>${group}</td>
+                    
+                    <td>
+                        <a name="groupName" href="./FindGroupByTeacherServ.jsp?groupName=${group}">${group}</a>
+                    </td>
                     <td>
                         <form action="../delete/DeleteCuratorServ.jsp" method="POST">
                             <input name="teacherName" type="hidden" value="${teacher.name}">

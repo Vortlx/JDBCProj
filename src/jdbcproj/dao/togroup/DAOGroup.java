@@ -84,16 +84,45 @@ public class DAOGroup {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "DELETE FROM groups WHERE name = ?";
-		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, name);
-		statement.executeUpdate();
+		int groupID = -1;
+		
+		String getGroupIDQuery = "SELECT id FROM groups WHERE name = '" + name + "'";
+		Statement getGroupIDStat = conn.createStatement();
+		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
+		if(groupRS.next()){
+			groupID = groupRS.getInt(1);
+		}else{
+			groupRS.close();
+			getGroupIDStat.close();
+			conn.close();
+			throw (new SQLException());
+		}
+		groupRS.close();
+		getGroupIDStat.close();
+		
+		String getStudentIDQuery = "SELECT id_student FROM student_in_group "
+									+ "WHERE id_group = '" + groupID + "'";
+		Statement getStudentIDStat = conn.createStatement();
+		ResultSet studentRS = getStudentIDStat.executeQuery(getStudentIDQuery);
+		
+		String deleteStudentQuery = "DELETE FROM students WHERE id = ?";
+		PreparedStatement deleteStudentStat = conn.prepareStatement(deleteStudentQuery);
+		while(studentRS.next()){
+			deleteStudentStat.setInt(1, studentRS.getInt(1));
+			deleteStudentStat.executeUpdate();
+		}
+		studentRS.close();
+		deleteStudentStat.close();
+		getStudentIDStat.close();
+		
+		String deleteGroupQuery = "DELETE FROM groups WHERE id = '" + groupID + "'";
+		Statement statement = conn.createStatement();
+		statement.executeUpdate(deleteGroupQuery);
 		
 		statement.close();
 		conn.close();
 	}
 	
-
 	/**
 	 * Return group which have specific name
 	 * 
@@ -134,6 +163,12 @@ public class DAOGroup {
 			
 			studentsRS.close();
 			studStat.close();
+		}else{
+			rs.close();
+			statement.close();
+			conn.close();
+			
+			throw (new SQLException());
 		}
 		
 		rs.close();

@@ -126,6 +126,56 @@ public class DAOStudents implements DAOPerson{
 		statement.close();
 		conn.close();
 	}
+	
+	public void updateGroup(String name, String familyName, String newGroupName) throws SQLException{
+		
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+		
+		int studentID = -1;
+		int newGroupID = -1;
+		
+		String getStudentIDQuery = "SELECT id FROM students "
+									+ "WHERE name='" + name + "' AND family_name='" + familyName + "'";
+		Statement getStudentIDStat = conn.createStatement();
+		ResultSet studentRS = getStudentIDStat.executeQuery(getStudentIDQuery);
+		if(studentRS.next()){
+			studentID = studentRS.getInt(1);
+		}else{
+			studentRS.close();
+			getStudentIDStat.close();
+			conn.close();
+			
+			throw (new SQLException());
+		}
+		studentRS.close();
+		getStudentIDStat.close();
+		
+		String getGroupIDQuery = "SELECT id FROM groups "
+									+ "WHERE name='" + newGroupName + "'";
+		Statement getGroupIDStat = conn.createStatement();
+		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
+		if(groupRS.next()){
+		newGroupID = groupRS.getInt(1);
+		}else{
+			groupRS.close();
+			getGroupIDStat.close();
+			conn.close();
+			
+			throw (new SQLException());
+		}
+		groupRS.close();
+		getGroupIDStat.close();
+				
+		String changeGroupQuery = "UPDATE student_in_group SET id_group = ? "
+									+ "WHERE id_student=?";
+		PreparedStatement changeGroupStat = conn.prepareStatement(changeGroupQuery);
+		changeGroupStat.setInt(1, newGroupID);
+		changeGroupStat.setInt(2, studentID);
+		changeGroupStat.executeUpdate();
+		
+		changeGroupStat.close();
+		conn.close();
+	}
 
 	/**
 	 * This method delete data from students table.

@@ -1,11 +1,11 @@
-﻿source ./JAVAProj/JDBCProj/sqlscripts/CreateStudents.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/CreateTeachers.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/CreateGroups.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/CreateStudentInGroup.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/CreateCurator.sql;
+﻿source ./JDBCProj/sqlscripts/CreateStudents.sql;
+source ./JDBCProj/sqlscripts/CreateTeachers.sql;
+source ./JDBCProj/sqlscripts/CreateGroups.sql;
+source ./JDBCProj/sqlscripts/CreateStudentInGroup.sql;
+source ./JDBCProj/sqlscripts/CreateCurator.sql;
 
-source ./JAVAProj/JDBCProj/sqlscripts/InsertStudents.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/InsertTeachers.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/InsertGroups.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/InsertStudentInGroup.sql;
-source ./JAVAProj/JDBCProj/sqlscripts/InsertCurator.sql;
+source ./JDBCProj/sqlscripts/InsertStudents.sql;
+source ./JDBCProj/sqlscripts/InsertTeachers.sql;
+source ./JDBCProj/sqlscripts/InsertGroups.sql;
+source ./JDBCProj/sqlscripts/InsertStudentInGroup.sql;
+source ./JDBCProj/sqlscripts/InsertCurator.sql;
