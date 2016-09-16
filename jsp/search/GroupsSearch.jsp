@@ -26,10 +26,14 @@
             <tr>
                 <c:choose>
                     <c:when test="${group.students.size() > 0}">
-                        <td rowspan="${group.students.size()}">${group.name}</td>
+                        <td rowspan="${group.students.size()}">
+                            <a name="toTeachers" href="./TeachersByGroupServ.jsp?groupName=${group.name}">${group.name}</a>
+                        </td>
                     </c:when>
                     <c:when test="${group.students.size() == 0}">
-                        <td>${group.name}</td>
+                        <td>
+                            <a name="toTeachers" href="./TeachersByGroupServ.jsp?groupName=${group.name}">${group.name}</a>
+                        </td>
                         <td> </td>
                         <td> </td>
                         </tr>

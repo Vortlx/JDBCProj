@@ -453,4 +453,54 @@ public class DAOTeachers implements DAOPerson {
 		
 		return res;
 	}
+	
+	public List<Teacher> getByGroup(String groupName) throws SQLException{
+		
+		Connection conn = DriverManager.getConnection(getProperty("URL"));
+		
+		int groupID = -1;
+		List<Teacher> res = new ArrayList<Teacher>();
+		
+		String getGroupIDQuery = "SELECT id FROM groups WHERE name = '" + groupName + "'";
+		Statement getGroupIDStat = conn.createStatement();
+		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
+		if(groupRS.next()){
+			groupID = groupRS.getInt(1);
+		}else{
+			groupRS.close();
+			getGroupIDStat.close();
+			conn.close();
+			throw (new SQLException());
+		}
+		groupRS.close();
+		getGroupIDStat.close();
+		
+		String getTeacherIDQuery = "SELECT id_teacher FROM curator "
+										+ "WHERE id_group = " + groupID;
+		Statement getTeacherIDStat = conn.createStatement();
+		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
+		
+		String getTeachers = "SELECT name, family_name FROM teachers WHERE id = ?";
+		PreparedStatement statement = conn.prepareStatement(getTeachers);
+		while(teacherRS.next()){
+			statement.setInt(1, teacherRS.getInt(1));
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.next()){
+				String teacherName = rs.getString(1);
+				String teacherFamilyName = rs.getString(2);
+				
+				res.add(new Teacher(teacherName, teacherFamilyName));
+			}
+			
+			rs.close();
+		}
+		
+		teacherRS.close();
+		getTeacherIDStat.close();
+		statement.close();
+		conn.close();
+		
+		return res;
+	}
 }

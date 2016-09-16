@@ -19,6 +19,10 @@
         <servlet-name>FindGroupByTeacher</servlet-name>
         <servlet-class>jdbcproj.controller.search.FindGroupByTeacher</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeachersByGroup</servlet-name>
+        <servlet-class>jdbcproj.controller.search.FindTeachersByGroup</servlet-class>
+    </servlet>
     
     <servlet>
         <servlet-name>DeleteGroup</servlet-name>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>FindGroupByTeacher</servlet-name>
         <url-pattern>/jsp/search/FindGroupByTeacherServ.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeachersByGroup</servlet-name>
+        <url-pattern>/jsp/search/TeachersByGroupServ.jsp</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>

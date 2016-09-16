@@ -41,7 +41,7 @@
                <c:forEach items="${teacher.groups}" var="group">
                     
                     <td>
-                        <a name="groupName" href="./FindGroupByTeacherServ.jsp?groupName=${group}">${group}</a>
+                        <a name="toGroup" href="./FindGroupByTeacherServ.jsp?groupName=${group}">${group}</a>
                     </td>
                     <td>
                         <form action="../delete/DeleteCuratorServ.jsp" method="POST">
