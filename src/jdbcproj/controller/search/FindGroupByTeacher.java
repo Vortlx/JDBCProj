@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbcproj.dao.DAOGroup;
-import jdbcproj.dao.DAOGroupWithConnection;
+import jdbcproj.dao.DAOGroupConnection;
 import jdbcproj.data.Group;
 
 
@@ -23,7 +23,7 @@ public class FindGroupByTeacher extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     	
-    	DAOGroup dao = new DAOGroupWithConnection();
+    	DAOGroup dao = new DAOGroupConnection();
    	
     	try{
     		String groupName = req.getParameter("groupName");

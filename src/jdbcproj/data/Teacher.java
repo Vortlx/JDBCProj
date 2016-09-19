@@ -26,8 +26,8 @@ public class Teacher extends Person {
      * @param name Name of teacher
      * @param familyName Family name of teacher
      * */
-    public Teacher(String name, String familyName){
-        super(name, familyName);
+    public Teacher(int id, String name, String familyName){
+        super(id, name, familyName);
         groups = new ArrayList<Group>();
     }
 
@@ -38,8 +38,8 @@ public class Teacher extends Person {
      *  @param familyName Family name of teacher
      *  @param groups List of groups which help teacher
      * */
-    public Teacher(String name, String familyName, ArrayList<Group> groups){
-        super(name, familyName);
+    public Teacher(int id, String name, String familyName, ArrayList<Group> groups){
+        super(id, name, familyName);
         this.groups = groups;
     }
 

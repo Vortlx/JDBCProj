@@ -17,6 +17,7 @@ public abstract class Person {
 	 * This constructor create undefined person. 
 	 * */
 	public Person(){
+		id = -1;
 		name = "";
 		familyName = "";
 	}
@@ -27,7 +28,8 @@ public abstract class Person {
 	 * @param name Name of person
 	 * @param familyName Family name of person
 	 * */
-	public Person(String name, String familyName){
+	public Person(int id, String name, String familyName){
+		this.id = id;
 		this.name = name;
 		this.familyName = familyName;
 	}

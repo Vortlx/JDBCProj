@@ -23,7 +23,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOTeachersWithConnection implements DAOTeachers{
+public class DAOTeachersConnection implements DAOTeachers{
 
 	static{
 		try{
@@ -47,16 +47,10 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
-		Teacher teacher = new Teacher(name, familyName);
-
-		for(Group group: groups){
-			teacher.addGroup(group);
-		}
-
 		String query = "INSERT INTO teachers (name, family_name) VALUES(?, ?)";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, teacher.getName());
-		statement.setString(2, teacher.getFamilyName());
+		statement.setString(1, name);
+		statement.setString(2, familyName);
 		statement.executeUpdate();
 		statement.close();
 
@@ -66,8 +60,8 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 		// Get teacher ID
 		int teacherID = -1;
 
-		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + teacher.getName() +
-									"' AND family_name = '" + teacher.getFamilyName() + "'";
+		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + name +
+									"' AND family_name = '" + familyName + "'";
 		Statement getIDTeacher = conn.createStatement();
 		ResultSet rs = getIDTeacher.executeQuery(teacherIDQuery);
 		if(rs.next()){
@@ -273,7 +267,7 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 			int teacherID = rs.getInt(1);
 			String familyName = rs.getString(3);
 			
-			Teacher teacher = new Teacher(name, familyName);
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -329,7 +323,7 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 			int teacherID = rs.getInt(1);
 			String name = rs.getString(2);
 			
-			Teacher teacher = new Teacher(name, familyName);
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -386,7 +380,7 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 		while(rs.next()){
 			int teacherID = rs.getInt(1);
 			
-			Teacher teacher = new Teacher(name, familyName);
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -441,7 +435,7 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 			int teacherID = rs.getInt(1);
 			String name = rs.getString(2);
 			String familyName = rs.getString(3);
-			Teacher teacher = new Teacher(name, familyName);
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -502,14 +496,15 @@ public class DAOTeachersWithConnection implements DAOTeachers{
 		String getTeachers = "SELECT name, family_name FROM teachers WHERE id = ?";
 		PreparedStatement statement = conn.prepareStatement(getTeachers);
 		while(teacherRS.next()){
-			statement.setInt(1, teacherRS.getInt(1));
+			int teacherID = teacherRS.getInt(1);
+			statement.setInt(1, teacherID);
 			ResultSet rs = statement.executeQuery();
 			
 			if(rs.next()){
 				String teacherName = rs.getString(1);
 				String teacherFamilyName = rs.getString(2);
 				
-				res.add(new Teacher(teacherName, teacherFamilyName));
+				res.add(new Teacher(teacherID, teacherName, teacherFamilyName));
 			}
 			
 			rs.close();

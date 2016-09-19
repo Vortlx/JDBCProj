@@ -2,7 +2,7 @@ package jdbcproj.controller.search;
 
 
 import jdbcproj.dao.DAOGroup;
-import jdbcproj.dao.DAOGroupWithConnection;
+import jdbcproj.dao.DAOGroupConnection;
 import jdbcproj.data.Group;
 
 import javax.servlet.RequestDispatcher;
@@ -27,7 +27,7 @@ public class FindGroup extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOGroup connToGroup = new DAOGroupWithConnection();
+        DAOGroup connToGroup = new DAOGroupConnection();
 
         String name = req.getParameter("name");
 

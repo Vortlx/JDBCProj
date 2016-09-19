@@ -23,7 +23,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOStudentsWithConnection implements DAOStudents{
+public class DAOStudentsConnection implements DAOStudents{
 
 	static{
 		try{
@@ -67,19 +67,17 @@ public class DAOStudentsWithConnection implements DAOStudents{
 		rs.close();
 		statement.close();
 
-		Student student = new Student(name, familyName, group);
-		
 		query = "INSERT INTO students (name, family_name) VALUES(?, ?)";
 		statement = conn.prepareStatement(query);
-		statement.setString(1, student.getName());
-		statement.setString(2, student.getFamilyName());
+		statement.setString(1, name);
+		statement.setString(2, familyName);
 		statement.executeUpdate();
 		statement.close();
 
 		query = "SELECT id FROM students WHERE name = ? AND family_name = ?";
 		statement = conn.prepareStatement(query);
-		statement.setString(1, student.getName());
-		statement.setString(2, student.getFamilyName());
+		statement.setString(1, name);
+		statement.setString(2, familyName);
 		rs = statement.executeQuery();
 		if(rs.next()){
 			studentID = rs.getInt(1);
@@ -212,7 +210,7 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+		String query = "SELECT students.id, students.name, students.family_name, tmp.name, tmp.id "
 				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
@@ -221,13 +219,14 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
-			String name = rs.getString(1);
-			String familyName = rs.getString(2);
-			String groupName = rs.getString(3);
-			int groupID = rs.getInt(4);
+			int studentID = rs.getInt(1);
+			String name = rs.getString(2);
+			String familyName = rs.getString(3);
+			String groupName = rs.getString(4);
+			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(name, familyName, group));
+			res.add(new Student(studentID, name, familyName, group));
 		}
 
 		rs.close();
@@ -251,7 +250,7 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+		String query = "SELECT students.id, students.name, students.family_name, tmp.name, tmp.id "
 				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
@@ -262,12 +261,13 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
-			String familyName = rs.getString(2);
-			String groupName = rs.getString(3);
-			int groupID = rs.getInt(4);
+			int studentID = rs.getInt(1);
+			String familyName = rs.getString(3);
+			String groupName = rs.getString(4);
+			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(name, familyName, group));
+			res.add(new Student(studentID, name, familyName, group));
 		}
 
 		rs.close();
@@ -291,7 +291,7 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+		String query = "SELECT students.id, students.name, students.family_name, tmp.name, tmp.id "
 				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
@@ -302,12 +302,13 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
-			String name = rs.getString(1);
-			String groupName = rs.getString(3);
-			int groupID = rs.getInt(4);
+			int studentID = rs.getInt(1);
+			String name = rs.getString(2);
+			String groupName = rs.getString(4);
+			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(name, familyName, group));
+			res.add(new Student(studentID, name, familyName, group));
 		}
 
 		rs.close();
@@ -332,7 +333,7 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+		String query = "SELECT students.id, students.name, students.family_name, tmp.name, tmp.id "
 				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
@@ -344,11 +345,12 @@ public class DAOStudentsWithConnection implements DAOStudents{
 
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
-			String groupName = rs.getString(3);
-			int groupID = rs.getInt(4);
+			int studentID = rs.getInt(1);
+			String groupName = rs.getString(4);
+			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(name, familyName, group));
+			res.add(new Student(studentID, name, familyName, group));
 		}
 
 		rs.close();

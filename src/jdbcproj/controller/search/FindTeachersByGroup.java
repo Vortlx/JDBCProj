@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersWithConnection;
+import jdbcproj.dao.DAOTeachersConnection;
 import jdbcproj.data.Teacher;
 
 
@@ -24,7 +24,7 @@ public class FindTeachersByGroup extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     	
-    	DAOTeachers dao = new DAOTeachersWithConnection();
+    	DAOTeachers dao = new DAOTeachersConnection();
 
     	try{
     		String groupName = req.getParameter("groupName");

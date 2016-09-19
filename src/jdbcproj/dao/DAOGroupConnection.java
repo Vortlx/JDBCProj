@@ -22,7 +22,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOGroupWithConnection implements DAOGroup {
+public class DAOGroupConnection implements DAOGroup {
 	
 	static{
 		try{
@@ -149,7 +149,7 @@ public class DAOGroupWithConnection implements DAOGroup {
 			int groupID = rs.getInt(1);
 			res = new Group(groupID, name);
 			
-			query = "SELECT students.name, students.family_name "
+			query = "SELECT students.id, students.name, students.family_name "
 					+ "FROM students INNER JOIN student_in_group "
 					+ "WHERE students.id = student_in_group.id_student "
 					+ "AND student_in_group.id_group = ?";
@@ -158,10 +158,11 @@ public class DAOGroupWithConnection implements DAOGroup {
 			ResultSet studentsRS = studStat.executeQuery();
 			
 			while(studentsRS.next()){
-				String studentName = studentsRS.getString(1);
-				String studentFamilyName = studentsRS.getString(2);
+				int studentID = studentsRS.getInt(1);
+				String studentName = studentsRS.getString(2);
+				String studentFamilyName = studentsRS.getString(3);
 				
-				res.addStudent(new Student(studentName, studentFamilyName, res));
+				res.addStudent(new Student(studentID, studentName, studentFamilyName, res));
 			}
 			
 			studentsRS.close();

@@ -25,8 +25,8 @@ public class Student extends Person {
      * @param familyName Family name of student
      * @param group Group in which student is
      * */
-    public Student(String name, String familyName, Group group){
-        super(name, familyName);
+    public Student(int id, String name, String familyName, Group group){
+        super(id, name, familyName);
         this.group = group;
     }
 

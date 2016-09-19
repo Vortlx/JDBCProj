@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersWithConnection;
+import jdbcproj.dao.DAOTeachersConnection;
 
 
 public class AddTeacher extends HttpServlet{
@@ -21,7 +21,7 @@ public class AddTeacher extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
-		DAOTeachers daoStudent = new DAOTeachersWithConnection();
+		DAOTeachers daoStudent = new DAOTeachersConnection();
 		
 		String name = req.getParameter("name");
 		String familyName = req.getParameter("familyName");

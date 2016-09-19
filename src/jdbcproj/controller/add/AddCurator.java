@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersWithConnection;
+import jdbcproj.dao.DAOTeachersConnection;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,7 +23,7 @@ public class AddCurator extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOTeachers daoTeachers = new DAOTeachersWithConnection();
+        DAOTeachers daoTeachers = new DAOTeachersConnection();
 
         try{
             String teacherName = req.getParameter("teacherName");

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jdbcproj.dao.DAOStudents;
-import jdbcproj.dao.DAOStudentsWithConnection;
+import jdbcproj.dao.DAOStudentsConnection;
 import jdbcproj.data.Student;
 
 
@@ -25,7 +25,7 @@ public class FindStudent extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 
-		DAOStudents connToStudent = new DAOStudentsWithConnection();
+		DAOStudents connToStudent = new DAOStudentsConnection();
 		
 		String name = req.getParameter("name");
 		String familyName = req.getParameter("familyName");

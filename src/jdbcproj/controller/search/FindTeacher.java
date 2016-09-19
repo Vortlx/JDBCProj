@@ -2,7 +2,7 @@ package jdbcproj.controller.search;
 
 
 import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersWithConnection;
+import jdbcproj.dao.DAOTeachersConnection;
 import jdbcproj.data.Teacher;
 
 import javax.servlet.RequestDispatcher;
@@ -23,7 +23,7 @@ public class FindTeacher extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOTeachers connToTeacher = new DAOTeachersWithConnection();
+        DAOTeachers connToTeacher = new DAOTeachersConnection();
 
         String name = req.getParameter("name");
         String familyName = req.getParameter("familyName");
