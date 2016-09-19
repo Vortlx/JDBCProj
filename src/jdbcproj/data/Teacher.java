@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * This class describe teacher.
  *
  * @author Lebedev Alexander
- * @since 2016-09-05
+ * @since 2016-09-19
  * */
 public class Teacher extends Person {
 

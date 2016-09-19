@@ -11,11 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOGroup;
-import jdbcproj.dao.DAOGroupConnection;
+import jdbcproj.dao.daogroup.DAOGroup;
+import jdbcproj.dao.daogroup.DAOGroupConnection;
 import jdbcproj.data.Group;
 
-
+/**
+ * Servlet search groups with specific curator
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class FindGroupByTeacher extends HttpServlet{
 
     private static final long serialVersionUID = 73111096375035L;

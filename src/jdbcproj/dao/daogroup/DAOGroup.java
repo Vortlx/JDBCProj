@@ -1,10 +1,16 @@
-package jdbcproj.dao;
+package jdbcproj.dao.daogroup;
 
 
 import java.sql.SQLException;
 import java.util.List;
 import jdbcproj.data.Group;
 
+/**
+ * This class define CRUD operation for groups table in database.
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public interface DAOGroup {
 	public void add(String name) throws SQLException;
 	

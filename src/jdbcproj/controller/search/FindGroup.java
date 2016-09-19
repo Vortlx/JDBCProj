@@ -1,8 +1,8 @@
 package jdbcproj.controller.search;
 
 
-import jdbcproj.dao.DAOGroup;
-import jdbcproj.dao.DAOGroupConnection;
+import jdbcproj.dao.daogroup.DAOGroup;
+import jdbcproj.dao.daogroup.DAOGroupConnection;
 import jdbcproj.data.Group;
 
 import javax.servlet.RequestDispatcher;
@@ -18,8 +18,11 @@ import java.util.List;
 
 
 /**
- * Created by lebedevas on 09.09.16.
- */
+ * Servlet search groups with specific properties
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class FindGroup extends HttpServlet {
 
     private static final long serialVersionUID = 7346289375035L;

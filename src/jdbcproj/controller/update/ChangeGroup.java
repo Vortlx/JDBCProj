@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOStudents;
-import jdbcproj.dao.DAOStudentsConnection;
+import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.daostudents.DAOStudentsConnection;
 
-
+/**
+ * Servlet change name of the student group in database
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class ChangeGroup extends HttpServlet{
    
 	private static final long serialVersionUID = 2620571141L;

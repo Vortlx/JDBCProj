@@ -13,11 +13,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOStudents;
-import jdbcproj.dao.DAOStudentsConnection;
+import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.daostudents.DAOStudentsConnection;
 import jdbcproj.data.Student;
 
-
+/**
+ * Servlet search students with specific properties
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class FindStudent extends HttpServlet{
 
 	private static final long serialVersionUID = 2387567823658L;

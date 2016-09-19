@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOStudents;
-import jdbcproj.dao.DAOStudentsConnection;
+import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.daostudents.DAOStudentsConnection;
 
-
+/**
+ * Servlet add student with specific name and family name into database
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class AddStudent extends HttpServlet{
 
 	private static final long serialVersionUID = 25323623311141L;

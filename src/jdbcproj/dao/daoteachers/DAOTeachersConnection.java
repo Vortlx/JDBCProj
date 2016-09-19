@@ -1,4 +1,4 @@
-package jdbcproj.dao;
+package jdbcproj.dao.daoteachers;
 
 
 import java.sql.Connection;
@@ -19,9 +19,9 @@ import static jdbcproj.resources.Resources.getProperty;
 
 /**
  * This class implements CRUD operation for teachers table.
- * 
+ *
  * @author Lebedev Alexander
- * @since 2016-09-07
+ * @since 2016-09-19
  * */
 public class DAOTeachersConnection implements DAOTeachers{
 
@@ -32,13 +32,16 @@ public class DAOTeachersConnection implements DAOTeachers{
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This method insert data into teachers table.
 	 *
-	 *  @see DAOPerson#add(Person person)
+	 * @see DAOTeachers#add(String, String, Group...)
 	 *
-	 *  @param person Person who will added in teachers table
+	 * @param name Name of teacher
+	 * @param familyName Family name of teacher
+	 * @param groups Array of groups which under this teacher
+	 *
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
@@ -90,6 +93,18 @@ public class DAOTeachersConnection implements DAOTeachers{
 		conn.close();
 	}
 
+	/**
+	 * Method make teacher with specific name and family name curator of group with specific name
+	 *
+	 * @see DAOTeachers#addGroup(String, String, String)
+	 *
+	 * @param name Name of teacher
+	 * @param familyName Family name of teacher
+	 * @param groupName Name of group
+	 *
+	 * @throws SQLException
+	 * @return Nothing
+	 * */
 	@Override
 	public void addGroup(String name, String familyName, String groupName) throws SQLException{
 
@@ -143,10 +158,13 @@ public class DAOTeachersConnection implements DAOTeachers{
 	/**
 	 * This method update data into teachers table.
 	 *
-	 * @see DAOPerson#update(Person oldPerson, Person newPerson)
+	 * @see DAOTeachers#update(String, String, String, String)
 	 *
-	 * @param oldPerson Person who was in table
-	 * @param newPerson Person who replace old person
+	 * @param oldName Old name of teacher
+	 * @param oldFamilyName Old family name of teacher
+	 * @param newName New name of teacher
+	 * @param newFamilyName New family name of teacher
+	 *
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
@@ -170,9 +188,11 @@ public class DAOTeachersConnection implements DAOTeachers{
 	/**
 	 * This method delete data from teachers table.
 	 *
-	 * @see DAOPerson#delete(Person person)
+	 * @see DAOTeachers#delete(String, String)
 	 *
-	 * @param person Person who will deleted from teachers table
+	 * @param name Name of teahcer
+	 * @param familyName Family name of teacher
+	 *
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
@@ -191,6 +211,18 @@ public class DAOTeachersConnection implements DAOTeachers{
 		conn.close();
 	}
 
+	/**
+	 * Method delete teacher with specific name and family name as curator from group with specific name
+	 *
+	 * @see DAOTeachers#deleteCurator(String, String, String)
+	 *
+	 * @param name Name of teahcer
+	 * @param familyName Family name of  teacher
+	 * @param groupName Name of group
+	 *
+	 * @throws SQLException
+	 * @return Nothing
+	 * */
 	@Override
 	public void deleteCurator(String name, String familyName, String groupName) throws SQLException{
 
@@ -244,7 +276,9 @@ public class DAOTeachersConnection implements DAOTeachers{
 
 	/**
 	 * This method return list of all teachers who have a specific name.
-	 * 
+	 *
+	 * @see DAOTeachers#getByName(String)
+	 *
 	 * @param name Name of teacher for whom there is a search
 	 * @throws SQLException
 	 * @return List of teachers who have a specific name
@@ -300,7 +334,9 @@ public class DAOTeachersConnection implements DAOTeachers{
 
 	/**
 	 * This method return list of all teachers who have a specific family name.
-	 * 
+	 *
+	 * @see DAOTeachers#getByName(String)
+	 *
 	 * @param familyName Family name of teacher for whom there is a search
 	 * @throws SQLException
 	 * @return List of teachers who have a specific family name
@@ -357,6 +393,8 @@ public class DAOTeachersConnection implements DAOTeachers{
 	/**
 	 * Method return list of teachers who have specific name and specific family name
 	 *
+	 * @see DAOTeachers#getTeacher(String, String)
+	 *
 	 * @param name Name of teacher
 	 * @param familyName Family name of teachers
 	 * @throws SQLException
@@ -410,10 +448,12 @@ public class DAOTeachersConnection implements DAOTeachers{
 		
 		return res;
 	}
-	
+
 
 	/**
 	 * This method return list of all teachers.
+	 *
+	 * @see DAOTeachers#getAll()
 	 *
 	 * @throws SQLException
 	 * @return List of teachers
@@ -465,56 +505,44 @@ public class DAOTeachersConnection implements DAOTeachers{
 		
 		return res;
 	}
-	
+
+	/**
+	 * Method return list of teachers by group's name
+	 *
+	 * @see DAOTeachers#getByGroup(String)
+	 *
+	 * @param groupName Name of group
+	 *
+	 * @throws SQLException
+	 * @retunr List List of teacher
+	 * */
 	@Override
 	public List<Teacher> getByGroup(String groupName) throws SQLException{
-		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		int groupID = -1;
+
 		List<Teacher> res = new ArrayList<Teacher>();
-		
-		String getGroupIDQuery = "SELECT id FROM groups WHERE name = '" + groupName + "'";
-		Statement getGroupIDStat = conn.createStatement();
-		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
-		if(groupRS.next()){
-			groupID = groupRS.getInt(1);
-		}else{
-			groupRS.close();
-			getGroupIDStat.close();
-			conn.close();
-			throw (new SQLException());
+
+		String query = "SELECT teachers.id, teachers.name, teachers.family_name " +
+						"FROM teachers INNER JOIN ( " +
+						"SELECT curator.id_teacher FROM groups INNER JOIN curator " +
+						"WHERE groups.id = curator.id_group AND groups.name = ?) AS tmp " +
+						"WHERE teachers.id = tmp.id_teacher";
+		PreparedStatement statement = conn.prepareStatement(query);
+		statement.setString(1, groupName);
+		ResultSet rs = statement.executeQuery();
+
+		while(rs.next()){
+			int teacherID = rs.getInt(1);
+			String teacherName = rs.getString(2);
+			String teacherFamilyName = rs.getString(3);
+
+			res.add(new Teacher(teacherID, teacherName, teacherFamilyName));
 		}
-		groupRS.close();
-		getGroupIDStat.close();
-		
-		String getTeacherIDQuery = "SELECT id_teacher FROM curator "
-										+ "WHERE id_group = " + groupID;
-		Statement getTeacherIDStat = conn.createStatement();
-		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
-		
-		String getTeachers = "SELECT name, family_name FROM teachers WHERE id = ?";
-		PreparedStatement statement = conn.prepareStatement(getTeachers);
-		while(teacherRS.next()){
-			int teacherID = teacherRS.getInt(1);
-			statement.setInt(1, teacherID);
-			ResultSet rs = statement.executeQuery();
-			
-			if(rs.next()){
-				String teacherName = rs.getString(1);
-				String teacherFamilyName = rs.getString(2);
-				
-				res.add(new Teacher(teacherID, teacherName, teacherFamilyName));
-			}
-			
-			rs.close();
-		}
-		
-		teacherRS.close();
-		getTeacherIDStat.close();
+
+		rs.close();
 		statement.close();
 		conn.close();
-		
+
 		return res;
 	}
 }

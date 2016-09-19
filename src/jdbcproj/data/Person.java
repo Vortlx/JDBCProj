@@ -3,9 +3,9 @@ package jdbcproj.data;
 
 /**
  * This abstract class describe a person. For example student or teacher.
- * 
+ *
  * @author Lebedev Alexander
- * @since 2016-09-05
+ * @since 2016-09-19
  * */
 public abstract class Person {
 	
@@ -33,7 +33,12 @@ public abstract class Person {
 		this.name = name;
 		this.familyName = familyName;
 	}
-	
+
+	/**
+	 * Method return id of person
+	 *
+	 * @return int ID of person
+	 * */
 	public int getId() {
 		return id;
 	}

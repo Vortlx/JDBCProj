@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 /**
  * This class describe groups in university
- * 
+ *
  * @author Lebedev Alexander
- * @since 2016-09-07
+ * @since 2016-09-19
  * */
 public class Group {
 
@@ -49,6 +49,11 @@ public class Group {
 		this.students = students;
 	}
 
+	/**
+	 * Method return id of group
+	 *
+	 * @return int ID of group
+	 * */
 	public int getId() {
 		return id;
 	}

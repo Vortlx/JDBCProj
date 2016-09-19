@@ -7,9 +7,9 @@ import java.util.Properties;
 
 /**
  * This class have access to property file with data for database. For example URL.
- * 
+ *
  * @author Lebedev Alexander
- * @since 2016-09-03
+ * @since 2016-09-19
  * */
 public abstract class Resources {
 	
@@ -19,7 +19,7 @@ public abstract class Resources {
 	
 	static{
 		try{
-			file = new File("C:\\apache-tomcat-9.0.0.M8\\webapps\\JDBCProj\\WEB-INF\\resources\\JDBCInfo.properties");
+			file = new File("D:\\apache-tomcat-9.0.0.M10\\webapps\\JDBCProj\\WEB-INF\\resources\\JDBCInfo.properties");
 			inProp = new FileInputStream(file);
 			prop = new Properties();
 			
@@ -31,7 +31,7 @@ public abstract class Resources {
 	}
 	
 	/**
-	 * Method return property from file.
+	 * Method return property from file. Else return null
 	 * 
 	 * @param key Key of value
 	 * @return String value of property
@@ -40,6 +40,13 @@ public abstract class Resources {
 		return prop.getProperty(key);
 	}
 
+	/**
+	 * Method return property from file. Else return def
+	 *
+	 * @param key Key of value
+	 * @param def Default value
+	 * @return String value of property
+	 * */
 	public static String getProperty(String key, String def){
 		return prop.getProperty(key, def);
 	}

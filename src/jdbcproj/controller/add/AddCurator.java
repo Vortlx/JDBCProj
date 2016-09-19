@@ -7,16 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersConnection;
+import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 
 /**
- * Created by lebedevas on 15.09.16.
- */
+ * Servlet add curator of specific group
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class AddCurator extends HttpServlet {
     private static final long serialVersionUID = 25777523771141L;
 

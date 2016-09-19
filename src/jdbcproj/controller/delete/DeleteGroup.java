@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOGroup;
-import jdbcproj.dao.DAOGroupConnection;
+import jdbcproj.dao.daogroup.DAOGroup;
+import jdbcproj.dao.daogroup.DAOGroupConnection;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +14,12 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-
+/**
+ * Servlet delete group with specific name
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class DeleteGroup extends HttpServlet{
 
 	private static final long serialVersionUID = 25376352337241L;

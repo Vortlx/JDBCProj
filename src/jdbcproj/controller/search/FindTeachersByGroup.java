@@ -12,11 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersConnection;
+import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 import jdbcproj.data.Teacher;
 
-
+/**
+ * Servlet search teachers who curatoring specific group
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class FindTeachersByGroup extends HttpServlet{
 
     private static final long serialVersionUID = 731035L;

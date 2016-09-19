@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOStudents;
-import jdbcproj.dao.DAOStudentsConnection;
+import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.daostudents.DAOStudentsConnection;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +14,12 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 
-
+/**
+ * Servlet delete student with specific name and family name
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class DeleteStudent extends HttpServlet{
 
 	private static final long serialVersionUID = 253765982137241L;

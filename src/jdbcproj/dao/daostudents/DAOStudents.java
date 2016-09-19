@@ -1,4 +1,4 @@
-package jdbcproj.dao;
+package jdbcproj.dao.daostudents;
 
 
 import java.sql.SQLException;
@@ -6,39 +6,59 @@ import java.util.List;
 
 import jdbcproj.data.Student;
 
-
+/**
+ * This class define CRUD operation for students table.
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public interface DAOStudents {
+
 	/**
 	 * This method insert data into students table.
 	 * 
-	 *  @see DAOPerson#add(Person person)
-	 *  
-	 *  @param person Person who will added in students table
+	 *
+	 *  @param name Name of student
+	 *  @param familyName Family Name of student
+	 *  @param groupName Name of group in which this student
+	 *
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(String name, String familyName, String groups) throws SQLException;
+	public void add(String name, String familyName, String groupName) throws SQLException;
 	
 	/**
 	 * This method update data into students table.
 	 * 
-	 * @see DAOPerson#update(Person oldPerson, Person newPerson)
-	 * 
-	 * @param oldPerson Person who was in table
-	 * @param newPerson Person who replace old person
+	 * @param oldName Old name of student
+	 * @param oldFamilyName Old family name of student
+	 * @param newName New name of student
+	 * @param newFamilyName New family name of student
+	 *
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
 	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException;
-	
+
+
+	/**
+	 * Method change current group of student on new group
+	 *
+	 * @param name Name of student
+	 * @param familyName Family name of student
+	 * @param newGroupName Name of new group
+	 *
+	 * @throws SQLException
+	 * @return Nothing
+	 * */
 	public void updateGroup(String name, String familyName, String newGroupName) throws SQLException;
 
 	/**
 	 * This method delete data from students table.
 	 * 
-	 * @see DAOPerson#delete(Person person)
-	 * 
-	 * @param person Person who will deleted from students table
+	 * @param name Name of student
+	 * @param familyName Family name of student
+	 *
 	 * @throws SQLException
 	 * @return Nothing
 	 * */

@@ -1,8 +1,8 @@
 package jdbcproj.controller.search;
 
 
-import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersConnection;
+import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 import jdbcproj.data.Teacher;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +16,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Servlet search teachers with specific properties
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class FindTeacher extends HttpServlet {
     private static final long serialVersionUID = 9878761265153L;
 

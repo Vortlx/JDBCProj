@@ -4,7 +4,7 @@ package jdbcproj.data;
  * This class describe student.
  *
  * @author Lebedev Alexander
- * @since 2016-09-05
+ * @since 2016-09-19
  * */
 public class Student extends Person {
 

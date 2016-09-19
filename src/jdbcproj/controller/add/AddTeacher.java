@@ -10,10 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.DAOTeachers;
-import jdbcproj.dao.DAOTeachersConnection;
+import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 
-
+/**
+ * Servlet add teacher with specific name and family name into database
+ *
+ * @author Lebedev Alexander
+ * @since 2016-09-19
+ * */
 public class AddTeacher extends HttpServlet{
 
 	private static final long serialVersionUID = 253444423311141L;
