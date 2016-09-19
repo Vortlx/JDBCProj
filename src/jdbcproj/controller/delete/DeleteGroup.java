@@ -1,16 +1,18 @@
 package jdbcproj.controller.delete;
 
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import jdbcproj.dao.DAOGroup;
+import jdbcproj.dao.DAOGroupWithConnection;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
-import jdbcproj.dao.togroup.DAOGroup;
 
 
 public class DeleteGroup extends HttpServlet{
@@ -20,7 +22,7 @@ public class DeleteGroup extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
-		DAOGroup dao = new DAOGroup();
+		DAOGroup dao = new DAOGroupWithConnection();
 		
 		String name = req.getParameter("name");
 		String mes = "";

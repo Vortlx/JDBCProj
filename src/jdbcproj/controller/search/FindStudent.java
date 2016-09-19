@@ -1,5 +1,6 @@
 package jdbcproj.controller.search;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.toperson.DAOStudents;
-import jdbcproj.data.person.Student;
+import jdbcproj.dao.DAOStudents;
+import jdbcproj.dao.DAOStudentsWithConnection;
+import jdbcproj.data.Student;
+
 
 public class FindStudent extends HttpServlet{
 
@@ -22,7 +25,7 @@ public class FindStudent extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 
-		DAOStudents connToStudent = new DAOStudents();
+		DAOStudents connToStudent = new DAOStudentsWithConnection();
 		
 		String name = req.getParameter("name");
 		String familyName = req.getParameter("familyName");

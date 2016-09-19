@@ -1,4 +1,4 @@
-package jdbcproj.dao.togroup;
+package jdbcproj.dao;
 
 
 import java.sql.Connection;
@@ -10,8 +10,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
-import jdbcproj.data.group.Group;
-import jdbcproj.data.person.Student;
+import jdbcproj.data.Group;
+import jdbcproj.data.Student;
 
 import static jdbcproj.resources.Resources.getProperty;
 
@@ -22,7 +22,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOGroup {
+public class DAOGroupWithConnection implements DAOGroup {
 	
 	static{
 		try{
@@ -39,6 +39,7 @@ public class DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
+	@Override
 	public void add(String name) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -59,6 +60,7 @@ public class DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
+	@Override
 	public void update(String name, String newName) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -80,6 +82,7 @@ public class DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
+	@Override
 	public void delete(String name) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -129,10 +132,12 @@ public class DAOGroup {
 	 * @param name Name of group
 	 * @return Group
 	 * */
+	@Override
 	public Group getByName(String name) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
+		Group res;
 		String query = "SELECT id FROM groups "
 						+ "WHERE name = ?";
 		
@@ -140,11 +145,9 @@ public class DAOGroup {
 		statement.setString(1, name);
 		ResultSet rs = statement.executeQuery();
 
-		
-		Group res = new Group(name);
-		
 		if(rs.next()){
 			int groupID = rs.getInt(1);
+			res = new Group(groupID, name);
 			
 			query = "SELECT students.name, students.family_name "
 					+ "FROM students INNER JOIN student_in_group "
@@ -158,7 +161,7 @@ public class DAOGroup {
 				String studentName = studentsRS.getString(1);
 				String studentFamilyName = studentsRS.getString(2);
 				
-				res.addStudent(new Student(studentName, studentFamilyName, name));
+				res.addStudent(new Student(studentName, studentFamilyName, res));
 			}
 			
 			studentsRS.close();
@@ -184,6 +187,7 @@ public class DAOGroup {
 	 * @throw SQLException
 	 * @return List of name (String) of all groups
 	 * */
+	@Override
 	public List<Group> getAll() throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));

@@ -1,4 +1,4 @@
-package jdbcproj.data.person;
+package jdbcproj.data;
 
 
 /**
@@ -9,6 +9,7 @@ package jdbcproj.data.person;
  * */
 public abstract class Person {
 	
+	private int id;
 	private String name;
 	private String familyName;
 	
@@ -31,6 +32,10 @@ public abstract class Person {
 		this.familyName = familyName;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	/**
 	 * This method return name of person
 	 * 

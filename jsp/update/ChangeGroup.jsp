@@ -8,7 +8,7 @@
 <title>Add Group</title>
 </head>
 <body>
-    <form action="./ChangeGroupServ.jsp" method="POST">
+    <form action="./ChangeGroupServ" method="POST">
         <input name="studentName" type="hidden" value="${param.studentName}">
         <input name="studentFamilyName" type="hidden" value="${param.studentFamilyName}">
         Group Name: <input name="newGroupName" type="text" required>

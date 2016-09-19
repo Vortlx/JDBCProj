@@ -5,13 +5,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jdbcproj.dao.DAOStudents;
+import jdbcproj.dao.DAOStudentsWithConnection;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
-import jdbcproj.dao.toperson.DAOStudents;
 
 
 public class DeleteStudent extends HttpServlet{
@@ -21,7 +22,7 @@ public class DeleteStudent extends HttpServlet{
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		
-		DAOStudents dao = new DAOStudents();
+		DAOStudents dao = new DAOStudentsWithConnection();
 		
 		String name = req.getParameter("name");
 		String familyName = req.getParameter("familyName");

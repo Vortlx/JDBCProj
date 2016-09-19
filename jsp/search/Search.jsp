@@ -7,17 +7,17 @@
 <title>Search</title>
 </head>
 <body>
-    <form action="./FindStudentServ.jsp" method="POST">
+    <form action="./FindStudentServ" method="POST">
         <input name="name" type="hidden" value="">
         <input name="familyName" type="hidden" value="">
         <input name="toStudents" type="submit" value="Find a student">
     </form>
-    <form action="./FindTeacherServ.jsp" method="POST">
+    <form action="./FindTeacherServ" method="POST">
         <input name="name" type="hidden" value="">
         <input name="familyName" type="hidden" value="">
         <input name="toTeachers" type="submit" value="Find a teacher">
     </form>
-    <form action="./FindGroupServ.jsp" method="POST">
+    <form action="./FindGroupServ" method="POST">
         <input name="name" type="hidden" value="">
         <input name="toGroups" type="submit" value="Find a group">
     </form>

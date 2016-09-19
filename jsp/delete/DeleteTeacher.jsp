@@ -7,7 +7,7 @@
 <title>Delete Teacher</title>
 </head>
 <body>
-    <form action="DeleteTeacherServ.jsp" method="POST">
+    <form action="DeleteTeacherServ" method="POST">
         Name: <input name="name" type="text" required>
         <br>
         Family Name: <input name="familyName" type="text" required>

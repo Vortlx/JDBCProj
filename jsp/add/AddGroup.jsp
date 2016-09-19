@@ -7,7 +7,7 @@
 <title>Add Group</title>
 </head>
 <body>
-    <form action="AddGroupServ.jsp" method="POST">
+    <form action="AddGroupServ" method="POST">
         Name: <input name="name" type="text" required>
         <br>
         <input name="add" type="submit" value="Add">

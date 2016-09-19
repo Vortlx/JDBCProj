@@ -1,4 +1,4 @@
-package jdbcproj.dao.toperson;
+package jdbcproj.dao;
 
 
 import java.sql.Connection;
@@ -9,8 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import jdbcproj.data.person.Person;
-import jdbcproj.data.person.Student;
+import jdbcproj.data.Group;
+import jdbcproj.data.Person;
+import jdbcproj.data.Student;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOStudents implements DAOPerson{
+public class DAOStudentsWithConnection implements DAOStudents{
 
 	static{
 		try{
@@ -42,25 +43,20 @@ public class DAOStudents implements DAOPerson{
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(String name, String familyName, String... groups) throws SQLException {
-
-		if(groups.length == 0){
-			return;
-		}
+	public void add(String name, String familyName, String groupName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
-		
-		Student student = new Student(name, familyName, groups[0]);
 
-		int groupID = - 1;
+		Group group;
 		int studentID = -1;
 
 		String query = "SELECT id FROM groups WHERE name = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(1, student.getGroup());
+		statement.setString(1, groupName);
 		ResultSet rs = statement.executeQuery();
 		if(rs.next()){
-			groupID = rs.getInt(1);
+			int groupID = rs.getInt(1);
+			group = new Group(groupID, groupName);
 		}else{
 			rs.close();
 			statement.close();
@@ -71,6 +67,8 @@ public class DAOStudents implements DAOPerson{
 		rs.close();
 		statement.close();
 
+		Student student = new Student(name, familyName, group);
+		
 		query = "INSERT INTO students (name, family_name) VALUES(?, ?)";
 		statement = conn.prepareStatement(query);
 		statement.setString(1, student.getName());
@@ -92,7 +90,7 @@ public class DAOStudents implements DAOPerson{
 
 		query = "INSERT INTO student_in_group (id_group, id_student) VALUES(?, ?)";
 		statement = conn.prepareStatement(query);
-		statement.setInt(1, groupID);
+		statement.setInt(1, group.getId());
 		statement.setInt(2, studentID);
 		statement.executeUpdate();
 
@@ -127,6 +125,7 @@ public class DAOStudents implements DAOPerson{
 		conn.close();
 	}
 	
+	@Override
 	public void updateGroup(String name, String familyName, String newGroupName) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -207,13 +206,14 @@ public class DAOStudents implements DAOPerson{
 	 * @throws SQLException
 	 * @return List of persons
 	 * */
+	@Override
 	public List<Student> getAll() throws SQLException {
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name "
-				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
 				+ "WHERE students.id = tmp.id_student";
@@ -223,7 +223,10 @@ public class DAOStudents implements DAOPerson{
 		while(rs.next()){
 			String name = rs.getString(1);
 			String familyName = rs.getString(2);
-			String group = rs.getString(3);
+			String groupName = rs.getString(3);
+			int groupID = rs.getInt(4);
+			
+			Group group = new Group(groupID, groupName);
 			res.add(new Student(name, familyName, group));
 		}
 
@@ -241,14 +244,15 @@ public class DAOStudents implements DAOPerson{
 	 * @throws SQLException
 	 * @return List of students who have a specific name
 	 * */
+	@Override
 	public List<Student> getByName(String name) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name "
-				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
 				+ "WHERE students.id = tmp.id_student "
@@ -259,7 +263,10 @@ public class DAOStudents implements DAOPerson{
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
 			String familyName = rs.getString(2);
-			String group = rs.getString(3);
+			String groupName = rs.getString(3);
+			int groupID = rs.getInt(4);
+			
+			Group group = new Group(groupID, groupName);
 			res.add(new Student(name, familyName, group));
 		}
 
@@ -277,14 +284,15 @@ public class DAOStudents implements DAOPerson{
 	 * @throws SQLException
 	 * @return List of students who have a specific family name
 	 * */
+	@Override
 	public List<Student> getByFamilyName(String familyName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name "
-				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
 				+ "WHERE students.id = tmp.id_student "
@@ -295,7 +303,10 @@ public class DAOStudents implements DAOPerson{
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
 			String name = rs.getString(1);
-			String group = rs.getString(3);
+			String groupName = rs.getString(3);
+			int groupID = rs.getInt(4);
+			
+			Group group = new Group(groupID, groupName);
 			res.add(new Student(name, familyName, group));
 		}
 
@@ -314,14 +325,15 @@ public class DAOStudents implements DAOPerson{
 	 * @throws SQLException
 	 * @return List of students who have specific name and specific family name
 	 * */
+	@Override
 	public List<Student> getStudent(String name, String familyName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		List<Student> res = new ArrayList<Student>();
 
-		String query = "SELECT students.name, students.family_name, tmp.name "
-				+ "FROM students INNER JOIN (SELECT groups.name, student_in_group.id_student "
+		String query = "SELECT students.name, students.family_name, tmp.name, tmp.id "
+				+ "FROM students INNER JOIN (SELECT groups.name, groups.id, student_in_group.id_student "
 				+ "FROM groups INNER JOIN student_in_group "
 				+ "WHERE groups.id = student_in_group.id_group) AS tmp "
 				+ "WHERE students.id = tmp.id_student "
@@ -332,7 +344,10 @@ public class DAOStudents implements DAOPerson{
 
 		ResultSet rs = statement.executeQuery();
 		while(rs.next()){
-			String group = rs.getString(3);
+			String groupName = rs.getString(3);
+			int groupID = rs.getInt(4);
+			
+			Group group = new Group(groupID, groupName);
 			res.add(new Student(name, familyName, group));
 		}
 

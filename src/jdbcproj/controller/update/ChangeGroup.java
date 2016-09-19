@@ -1,5 +1,6 @@
 package jdbcproj.controller.update;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.toperson.DAOStudents;
+import jdbcproj.dao.DAOStudents;
+import jdbcproj.dao.DAOStudentsWithConnection;
+
 
 public class ChangeGroup extends HttpServlet{
    
@@ -18,7 +21,7 @@ public class ChangeGroup extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     	
-    	DAOStudents dao = new DAOStudents();
+    	DAOStudents dao = new DAOStudentsWithConnection();
     	
     	try{
     		String studentName = req.getParameter("studentName");

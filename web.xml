@@ -66,61 +66,61 @@
 
     <servlet-mapping>
         <servlet-name>FindStudent</servlet-name>
-        <url-pattern>/jsp/search/FindStudentServ.jsp</url-pattern>
+        <url-pattern>/jsp/search/FindStudentServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FindTeacher</servlet-name>
-        <url-pattern>/jsp/search/FindTeacherServ.jsp</url-pattern>
+        <url-pattern>/jsp/search/FindTeacherServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FindGroup</servlet-name>
-        <url-pattern>/jsp/search/FindGroupServ.jsp</url-pattern>
+        <url-pattern>/jsp/search/FindGroupServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FindGroupByTeacher</servlet-name>
-        <url-pattern>/jsp/search/FindGroupByTeacherServ.jsp</url-pattern>
+        <url-pattern>/jsp/search/FindGroupByTeacherServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TeachersByGroup</servlet-name>
-        <url-pattern>/jsp/search/TeachersByGroupServ.jsp</url-pattern>
+        <url-pattern>/jsp/search/TeachersByGroupServ</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>DeleteGroup</servlet-name>
-        <url-pattern>/jsp/delete/DeleteGroupServ.jsp</url-pattern>
+        <url-pattern>/jsp/delete/DeleteGroupServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteStudent</servlet-name>
-        <url-pattern>/jsp/delete/DeleteStudentServ.jsp</url-pattern>
+        <url-pattern>/jsp/delete/DeleteStudentServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteTeacher</servlet-name>
-        <url-pattern>/jsp/delete/DeleteTeacherServ.jsp</url-pattern>
+        <url-pattern>/jsp/delete/DeleteTeacherServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteCurator</servlet-name>
-        <url-pattern>/jsp/delete/DeleteCuratorServ.jsp</url-pattern>
+        <url-pattern>/jsp/delete/DeleteCuratorServ</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>AddTeacher</servlet-name>
-        <url-pattern>/jsp/add/AddTeacherServ.jsp</url-pattern>
+        <url-pattern>/jsp/add/AddTeacherServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddStudent</servlet-name>
-        <url-pattern>/jsp/add/AddStudentServ.jsp</url-pattern>
+        <url-pattern>/jsp/add/AddStudentServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddGroup</servlet-name>
-        <url-pattern>/jsp/add/AddGroupServ.jsp</url-pattern>
+        <url-pattern>/jsp/add/AddGroupServ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddCurator</servlet-name>
-        <url-pattern>/jsp/add/AddCuratorServ.jsp</url-pattern>
+        <url-pattern>/jsp/add/AddCuratorServ</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>ChangeGroup</servlet-name>
-        <url-pattern>/jsp/update/ChangeGroupServ.jsp</url-pattern>
+        <url-pattern>/jsp/update/ChangeGroupServ</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -1,8 +1,9 @@
 package jdbcproj.controller.search;
 
 
-import jdbcproj.dao.toperson.DAOTeachers;
-import jdbcproj.data.person.Teacher;
+import jdbcproj.dao.DAOTeachers;
+import jdbcproj.dao.DAOTeachersWithConnection;
+import jdbcproj.data.Teacher;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,13 +16,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class FindTeacher extends HttpServlet {
     private static final long serialVersionUID = 9878761265153L;
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOTeachers connToTeacher = new DAOTeachers();
+        DAOTeachers connToTeacher = new DAOTeachersWithConnection();
 
         String name = req.getParameter("name");
         String familyName = req.getParameter("familyName");

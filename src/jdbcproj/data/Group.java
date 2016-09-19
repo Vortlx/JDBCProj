@@ -1,10 +1,8 @@
-package jdbcproj.data.group;
+package jdbcproj.data;
 
 
 import java.util.List;
 import java.util.ArrayList;
-
-import jdbcproj.data.person.Student;
 
 
 /**
@@ -15,6 +13,7 @@ import jdbcproj.data.person.Student;
  * */
 public class Group {
 
+	int id;
 	private String name;
 	private List<Student> students;
 	
@@ -22,6 +21,7 @@ public class Group {
 	 * Create undefined group
 	 * */
 	public Group(){
+		id = -1;
 		name = "";
 		students = new ArrayList<Student>();
 	}
@@ -31,7 +31,8 @@ public class Group {
 	 * 
 	 * @param name Name of group
 	 * */
-	public Group(String name){
+	public Group(int id, String name){
+		this.id = id;
 		this.name = name;
 		students = new ArrayList<Student>();
 	}
@@ -42,9 +43,14 @@ public class Group {
 	 * @param name Name of group
 	 * @param students List of students which in this group
 	 * */
-	public Group(String name, List<Student> students){
+	public Group(int id, String name, List<Student> students){
+		this.id = id;
 		this.name = name;
 		this.students = students;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public void addStudent(Student student){

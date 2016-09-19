@@ -1,7 +1,9 @@
 package jdbcproj.controller.search;
 
-import jdbcproj.dao.togroup.DAOGroup;
-import jdbcproj.data.group.Group;
+
+import jdbcproj.dao.DAOGroup;
+import jdbcproj.dao.DAOGroupWithConnection;
+import jdbcproj.data.Group;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -14,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * Created by lebedevas on 09.09.16.
  */
@@ -24,7 +27,7 @@ public class FindGroup extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-        DAOGroup connToGroup = new DAOGroup();
+        DAOGroup connToGroup = new DAOGroupWithConnection();
 
         String name = req.getParameter("name");
 

@@ -1,9 +1,8 @@
 package jdbcproj.controller.search;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.togroup.DAOGroup;
-import jdbcproj.data.group.Group;
+import jdbcproj.dao.DAOGroup;
+import jdbcproj.dao.DAOGroupWithConnection;
+import jdbcproj.data.Group;
+
 
 public class FindGroupByTeacher extends HttpServlet{
 
@@ -22,7 +23,7 @@ public class FindGroupByTeacher extends HttpServlet{
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
     	
-    	DAOGroup dao = new DAOGroup();
+    	DAOGroup dao = new DAOGroupWithConnection();
    	
     	try{
     		String groupName = req.getParameter("groupName");

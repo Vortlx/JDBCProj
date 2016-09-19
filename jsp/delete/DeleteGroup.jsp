@@ -7,7 +7,7 @@
 <title>Delete Group</title>
 </head>
 <body>
-    <form action="DeleteGroupServ.jsp" method="POST">
+    <form action="DeleteGroupServ" method="POST">
         Group: <input name="name" type="text" required>
         <br>
         <input name="back" type="submit" value="Delete">

@@ -1,4 +1,4 @@
-package jdbcproj.dao.toperson;
+package jdbcproj.dao;
 
 
 import java.sql.Connection;
@@ -9,8 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import jdbcproj.data.person.Person;
-import jdbcproj.data.person.Teacher;
+import jdbcproj.data.Group;
+import jdbcproj.data.Person;
+import jdbcproj.data.Teacher;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import static jdbcproj.resources.Resources.getProperty;
  * @author Lebedev Alexander
  * @since 2016-09-07
  * */
-public class DAOTeachers implements DAOPerson {
+public class DAOTeachersWithConnection implements DAOTeachers{
 
 	static{
 		try{
@@ -42,13 +43,13 @@ public class DAOTeachers implements DAOPerson {
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(String name, String familyName, String... groups) throws SQLException {
+	public void add(String name, String familyName, Group... groups) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		Teacher teacher = new Teacher(name, familyName);
 
-		for(String group: groups){
+		for(Group group: groups){
 			teacher.addGroup(group);
 		}
 
@@ -76,9 +77,9 @@ public class DAOTeachers implements DAOPerson {
 		//Get group ID
 		String groupIDQuery = "SELECT id FROM groups WHERE name = ?";
 		PreparedStatement getIDGroup = conn.prepareStatement(groupIDQuery);
-		for(String group: groups){
+		for(Group group: groups){
 			int groupID = -1;
-			getIDGroup.setString(1, group);
+			getIDGroup.setString(1, group.getName());
 			rs = getIDGroup.executeQuery(groupIDQuery);
 
 			if(rs.next()){
@@ -95,7 +96,7 @@ public class DAOTeachers implements DAOPerson {
 		conn.close();
 	}
 
-
+	@Override
 	public void addGroup(String name, String familyName, String groupName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -196,6 +197,7 @@ public class DAOTeachers implements DAOPerson {
 		conn.close();
 	}
 
+	@Override
 	public void deleteCurator(String name, String familyName, String groupName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -253,6 +255,7 @@ public class DAOTeachers implements DAOPerson {
 	 * @throws SQLException
 	 * @return List of teachers who have a specific name
 	 * */
+	@Override
 	public List<Teacher> getByName(String name) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -272,7 +275,7 @@ public class DAOTeachers implements DAOPerson {
 			
 			Teacher teacher = new Teacher(name, familyName);
 			
-			String getGroupQuery = "SELECT groups.name "
+			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
 									+ "WHERE groups.id = curator.id_group "
 									+ "AND curator.id_teacher = ?";
@@ -281,7 +284,10 @@ public class DAOTeachers implements DAOPerson {
 			getGroupStat.setInt(1, teacherID);
 			ResultSet groupRS = getGroupStat.executeQuery();
 			while(groupRS.next()){
-				String group = groupRS.getString(1);
+				String groupName = groupRS.getString(1);
+				int groupID = groupRS.getInt(2);
+				
+				Group group = new Group(groupID, groupName);
 				teacher.addGroup(group);
 			}
 			
@@ -305,6 +311,7 @@ public class DAOTeachers implements DAOPerson {
 	 * @throws SQLException
 	 * @return List of teachers who have a specific family name
 	 * */
+	@Override
 	public List<Teacher> getByFamilyName(String familyName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -324,7 +331,7 @@ public class DAOTeachers implements DAOPerson {
 			
 			Teacher teacher = new Teacher(name, familyName);
 			
-			String getGroupQuery = "SELECT groups.name "
+			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
 									+ "WHERE groups.id = curator.id_group "
 									+ "AND curator.id_teacher = ?";
@@ -333,7 +340,10 @@ public class DAOTeachers implements DAOPerson {
 			getGroupStat.setInt(1, teacherID);
 			ResultSet groupRS = getGroupStat.executeQuery();
 			while(groupRS.next()){
-				String group = groupRS.getString(1);
+				String groupName = groupRS.getString(1);
+				int groupID = groupRS.getInt(2);
+				
+				Group group = new Group(groupID, groupName);
 				teacher.addGroup(group);
 			}
 			
@@ -358,6 +368,7 @@ public class DAOTeachers implements DAOPerson {
 	 * @throws SQLException
 	 * @return List of teachers who have specific name and specific family name
 	 * */
+	@Override
 	public List<Teacher> getTeacher(String name, String familyName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -377,7 +388,7 @@ public class DAOTeachers implements DAOPerson {
 			
 			Teacher teacher = new Teacher(name, familyName);
 			
-			String getGroupQuery = "SELECT groups.name "
+			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
 									+ "WHERE groups.id = curator.id_group "
 									+ "AND curator.id_teacher = ?";
@@ -386,7 +397,10 @@ public class DAOTeachers implements DAOPerson {
 			getGroupStat.setInt(1, teacherID);
 			ResultSet groupRS = getGroupStat.executeQuery();
 			while(groupRS.next()){
-				String group = groupRS.getString(1);
+				String groupName = groupRS.getString(1);
+				int groupID = groupRS.getInt(2);
+				
+				Group group = new Group(groupID, groupName);
 				teacher.addGroup(group);
 			}
 			
@@ -410,6 +424,7 @@ public class DAOTeachers implements DAOPerson {
 	 * @throws SQLException
 	 * @return List of teachers
 	 * */
+	@Override
 	public List<Teacher> getAll() throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
@@ -428,7 +443,7 @@ public class DAOTeachers implements DAOPerson {
 			String familyName = rs.getString(3);
 			Teacher teacher = new Teacher(name, familyName);
 			
-			String getGroupQuery = "SELECT groups.name "
+			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
 									+ "WHERE groups.id = curator.id_group "
 									+ "AND curator.id_teacher = ?";
@@ -437,7 +452,10 @@ public class DAOTeachers implements DAOPerson {
 			getGroupStat.setInt(1, teacherID);
 			ResultSet groupRS = getGroupStat.executeQuery();
 			while(groupRS.next()){
-				String group = groupRS.getString(1);
+				String groupName = groupRS.getString(1);
+				int groupID = groupRS.getInt(2);
+				
+				Group group = new Group(groupID, groupName);
 				teacher.addGroup(group);
 			}
 			
@@ -454,6 +472,7 @@ public class DAOTeachers implements DAOPerson {
 		return res;
 	}
 	
+	@Override
 	public List<Teacher> getByGroup(String groupName) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));

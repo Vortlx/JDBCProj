@@ -7,7 +7,7 @@
 <title>Add Group</title>
 </head>
 <body>
-    <form action="AddTeacherServ.jsp" method="POST">
+    <form action="AddTeacherServ" method="POST">
         Name: <input name="name" type="text" required>
         <br>
         Family Name: <input name="familyName" type="text" required>

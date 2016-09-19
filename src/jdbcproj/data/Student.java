@@ -1,4 +1,4 @@
-package jdbcproj.data.person;
+package jdbcproj.data;
 
 /**
  * This class describe student.
@@ -8,14 +8,14 @@ package jdbcproj.data.person;
  * */
 public class Student extends Person {
 
-    private String group;
+    private Group group;
 
     /**
      * This constructor create undefined student.
      * */
     public Student(){
         super();
-        group = "";
+        group = new Group();
     }
 
     /**
@@ -25,7 +25,7 @@ public class Student extends Person {
      * @param familyName Family name of student
      * @param group Group in which student is
      * */
-    public Student(String name, String familyName, String group){
+    public Student(String name, String familyName, Group group){
         super(name, familyName);
         this.group = group;
     }
@@ -35,7 +35,7 @@ public class Student extends Person {
      *
      * @return int Number of group in which student is
      * */
-    public String getGroup() {
+    public Group getGroup() {
         return group;
     }
 
@@ -45,7 +45,7 @@ public class Student extends Person {
      * @param group Number of new group
      * @return Nothing
      * */
-    public void setGroup(String group) {
+    public void setGroup(Group group) {
         this.group = group;
     }
 }

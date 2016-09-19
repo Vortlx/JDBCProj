@@ -8,7 +8,7 @@
 <title>Search Teachers</title>
 </head>
 <body>
-    <form action="../search/FindTeacherServ.jsp" method="POST">
+    <form action="../search/FindTeacherServ" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
@@ -41,13 +41,13 @@
                <c:forEach items="${teacher.groups}" var="group">
                     
                     <td>
-                        <a name="toGroup" href="./FindGroupByTeacherServ.jsp?groupName=${group}">${group}</a>
+                        <a name="toGroup" href="./FindGroupByTeacherServ?groupName=${group.name}">${group.name}</a>
                     </td>
                     <td>
-                        <form action="../delete/DeleteCuratorServ.jsp" method="POST">
+                        <form action="../delete/DeleteCuratorServ" method="POST">
                             <input name="teacherName" type="hidden" value="${teacher.name}">
                             <input name="teacherFamilyName" type="hidden" value="${teacher.familyName}">
-                            <input name="groupName" type="hidden" value="${group}">
+                            <input name="groupName" type="hidden" value="${group.name}">
                             <input name="delete" type="submit" value="Delete"/>
                         </form>
                     </td>

@@ -8,7 +8,7 @@
 <title>Search Students</title>
 </head>
 <body>
-    <form action="../search/FindStudentServ.jsp" method="POST">
+    <form action="../search/FindStudentServ" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
@@ -29,7 +29,7 @@
                <td>${student.name}</td>
                <td>${student.familyName}</td>
                <td>
-                   ${student.group}
+                   ${student.group.name}
                    <br>
                    <form action="../update/ChangeGroup.jsp" method="POST">
                        <input name="studentName" type="hidden" value="${student.name}">

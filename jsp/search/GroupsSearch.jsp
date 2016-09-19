@@ -8,7 +8,7 @@
 <title>Search Groups</title>
 </head>
 <body>
-    <form action="FindGroupServ.jsp" method="POST">
+    <form action="FindGroupServ" method="POST">
         Name: <input name="name" type="text">
         <br>
         <input name="send" type="submit" value="Find">
@@ -27,7 +27,7 @@
                 <c:choose>
                     <c:when test="${group.students.size() > 0}">
                         <td rowspan="${group.students.size()}">
-                            <a name="toTeachers" href="./TeachersByGroupServ.jsp?groupName=${group.name}">${group.name}</a>
+                            <a name="toTeachers" href="./TeachersByGroupServ?groupName=${group.name}">${group.name}</a>
                         </td>
                     </c:when>
                     <c:when test="${group.students.size() == 0}">
