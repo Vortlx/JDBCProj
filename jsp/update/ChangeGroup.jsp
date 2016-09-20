@@ -9,8 +9,7 @@
 </head>
 <body>
     <form action="./ChangeGroupServ" method="POST">
-        <input name="studentName" type="hidden" value="${param.studentName}">
-        <input name="studentFamilyName" type="hidden" value="${param.studentFamilyName}">
+        <input name="studentID" type="hidden" value="${param.studentID}">
         Group Name: <input name="newGroupName" type="text" required>
         <br>
         <input name="add" type="submit" value="Change">

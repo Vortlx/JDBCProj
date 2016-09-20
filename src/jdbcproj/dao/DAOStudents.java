@@ -1,4 +1,4 @@
-package jdbcproj.dao.daostudents;
+package jdbcproj.dao;
 
 
 import java.sql.SQLException;
@@ -38,7 +38,7 @@ public interface DAOStudents {
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
-	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException;
+	public void update(int studentID, String newName, String newFamilyName) throws SQLException;
 
 
 	/**
@@ -51,7 +51,7 @@ public interface DAOStudents {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void updateGroup(String name, String familyName, String newGroupName) throws SQLException;
+	public void updateGroup(int studentID, String newGroupName) throws SQLException;
 
 	/**
 	 * This method delete data from students table.

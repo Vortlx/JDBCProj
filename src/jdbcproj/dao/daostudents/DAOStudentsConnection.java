@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import jdbcproj.dao.DAOStudents;
 import jdbcproj.data.Group;
-import jdbcproj.data.Person;
 import jdbcproj.data.Student;
 
 import java.util.ArrayList;
@@ -66,7 +66,6 @@ public class DAOStudentsConnection implements DAOStudents{
 			conn.close();
 			throw (new SQLException());
 		}
-
 		rs.close();
 		statement.close();
 
@@ -113,14 +112,13 @@ public class DAOStudentsConnection implements DAOStudents{
 	 * @return Nothing.
 	 * */
 	@Override
-	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException {
+	public void update(int studentID, String newName, String newFamilyName) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "UPDATE students SET name = ?, family_name = ? WHERE name = ? AND family_name = ?";
+		String query = "UPDATE students SET name = ?, family_name = ? WHERE id = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(3, oldName);
-		statement.setString(4, oldFamilyName);
+		statement.setInt(3, studentID);
 		statement.setString(1, newName);
 		statement.setString(2, newFamilyName);
 		statement.executeUpdate();
@@ -142,35 +140,18 @@ public class DAOStudentsConnection implements DAOStudents{
 	 * @return Nothing
 	 * */
 	@Override
-	public void updateGroup(String name, String familyName, String newGroupName) throws SQLException{
+	public void updateGroup(int studentID, String newGroupName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
-		int studentID = -1;
 		int newGroupID = -1;
-
-		String getStudentIDQuery = "SELECT id FROM students "
-									+ "WHERE name='" + name + "' AND family_name='" + familyName + "'";
-		Statement getStudentIDStat = conn.createStatement();
-		ResultSet studentRS = getStudentIDStat.executeQuery(getStudentIDQuery);
-		if(studentRS.next()){
-			studentID = studentRS.getInt(1);
-		}else{
-			studentRS.close();
-			getStudentIDStat.close();
-			conn.close();
-
-			throw (new SQLException());
-		}
-		studentRS.close();
-		getStudentIDStat.close();
-
+		
 		String getGroupIDQuery = "SELECT id FROM groups "
 									+ "WHERE name='" + newGroupName + "'";
 		Statement getGroupIDStat = conn.createStatement();
 		ResultSet groupRS = getGroupIDStat.executeQuery(getGroupIDQuery);
 		if(groupRS.next()){
-		newGroupID = groupRS.getInt(1);
+			newGroupID = groupRS.getInt(1);
 		}else{
 			groupRS.close();
 			getGroupIDStat.close();

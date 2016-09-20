@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.daogroup.DAOGroup;
+import jdbcproj.dao.DAOGroup;
 import jdbcproj.dao.daogroup.DAOGroupConnection;
 
 /**

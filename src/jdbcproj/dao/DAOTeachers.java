@@ -1,10 +1,9 @@
-package jdbcproj.dao.daoteachers;
+package jdbcproj.dao;
 
 
 import java.sql.SQLException;
 import java.util.List;
 
-import jdbcproj.data.Group;
 import jdbcproj.data.Teacher;
 
 /**
@@ -25,7 +24,7 @@ public interface DAOTeachers {
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(String name, String familyName, Group... groups) throws SQLException;
+	public void add(String name, String familyName) throws SQLException;
 
 
 	/**
@@ -38,7 +37,7 @@ public interface DAOTeachers {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void addGroup(String name, String familyName, String groupName) throws SQLException;
+	public void addGroup(int teacherID, String groupName) throws SQLException;
 	
 	/**
 	 * This method update data into teachers table.
@@ -51,7 +50,7 @@ public interface DAOTeachers {
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
-	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException;
+	public void update(int teacherID, String newName, String newFamilyName) throws SQLException;
 
 	/**
 	 * This method delete data from teachers table.
@@ -75,7 +74,7 @@ public interface DAOTeachers {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void deleteCurator(String name, String familyName, String groupName) throws SQLException;
+	public void deleteCurator(int teacherID, String groupName) throws SQLException;
 
 	/**
 	 * This method return list of all teachers who have a specific name.

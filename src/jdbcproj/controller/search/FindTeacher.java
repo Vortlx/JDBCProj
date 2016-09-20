@@ -1,7 +1,7 @@
 package jdbcproj.controller.search;
 
 
-import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.DAOTeachers;
 import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 import jdbcproj.data.Teacher;
 

@@ -32,8 +32,7 @@
                    ${student.group.name}
                    <br>
                    <form action="../update/ChangeGroup.jsp" method="POST">
-                       <input name="studentName" type="hidden" value="${student.name}">
-                       <input name="studentFamilyName" type="hidden" value="${student.familyName}">
+                       <input name="studentID" type="hidden" value="${student.id}">
                        <input name="change" type="submit" value="Change">
                    </form>
                </td>

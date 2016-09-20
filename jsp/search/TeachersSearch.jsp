@@ -45,8 +45,7 @@
                     </td>
                     <td>
                         <form action="../delete/DeleteCuratorServ" method="POST">
-                            <input name="teacherName" type="hidden" value="${teacher.name}">
-                            <input name="teacherFamilyName" type="hidden" value="${teacher.familyName}">
+                            <input name="teacherID" type="hidden" value="${teacher.id}">
                             <input name="groupName" type="hidden" value="${group.name}">
                             <input name="delete" type="submit" value="Delete"/>
                         </form>
@@ -57,8 +56,7 @@
                </c:forEach>
                <td>
                    <form action="../add/AddCurator.jsp" method="POST">
-                       <input name="teacherName" type="hidden" value="${teacher.name}">
-                       <input name="teacherFamilyName" type="hidden" value="${teacher.familyName}">
+                       <input name="teacherID" type="hidden" value="${teacher.id}">
                        <input name="add" type="submit" value="Add"/>
                    </form>
                </td>

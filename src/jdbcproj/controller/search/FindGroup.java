@@ -1,7 +1,7 @@
 package jdbcproj.controller.search;
 
 
-import jdbcproj.dao.daogroup.DAOGroup;
+import jdbcproj.dao.DAOGroup;
 import jdbcproj.dao.daogroup.DAOGroupConnection;
 import jdbcproj.data.Group;
 

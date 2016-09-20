@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.daoteachers.DAOTeachers;
+import jdbcproj.dao.DAOTeachers;
 import jdbcproj.dao.daoteachers.DAOTeachersConnection;
 
 import java.io.IOException;
@@ -29,11 +29,10 @@ public class AddCurator extends HttpServlet {
         DAOTeachers daoTeachers = new DAOTeachersConnection();
 
         try{
-            String teacherName = req.getParameter("teacherName");
-            String teacherFamilyName = req.getParameter("teacherFamilyName");
+            int teacherID = Integer.parseInt(req.getParameter("teacherID"));
             String groupName = req.getParameter("groupName");
 
-            daoTeachers.addGroup(teacherName, teacherFamilyName, groupName);
+            daoTeachers.addGroup(teacherID, groupName);
 
         }catch(SQLException e){
         	e.printStackTrace();

@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import jdbcproj.dao.DAOTeachers;
 import jdbcproj.data.Group;
-import jdbcproj.data.Person;
 import jdbcproj.data.Teacher;
 
 import java.util.ArrayList;
@@ -46,8 +46,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 *  @return Nothing.
 	 * */
 	@Override
-	public void add(String name, String familyName, Group... groups) throws SQLException {
-
+	public void add(String name, String familyName) throws SQLException {
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
 		String query = "INSERT INTO teachers (name, family_name) VALUES(?, ?)";
@@ -55,40 +54,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 		statement.setString(1, name);
 		statement.setString(2, familyName);
 		statement.executeUpdate();
-		statement.close();
-
-		query = "INSERT INTO curator(id_group, id_teacher) VALUES(?, ?)";
-		statement = conn.prepareStatement(query);
-
-		// Get teacher ID
-		int teacherID = -1;
-
-		String teacherIDQuery = "SELECT id FROM teachers WHERE name = '" + name +
-									"' AND family_name = '" + familyName + "'";
-		Statement getIDTeacher = conn.createStatement();
-		ResultSet rs = getIDTeacher.executeQuery(teacherIDQuery);
-		if(rs.next()){
-			teacherID = rs.getInt(1);
-		}
-
-		//Get group ID
-		String groupIDQuery = "SELECT id FROM groups WHERE name = ?";
-		PreparedStatement getIDGroup = conn.prepareStatement(groupIDQuery);
-		for(Group group: groups){
-			int groupID = -1;
-			getIDGroup.setString(1, group.getName());
-			rs = getIDGroup.executeQuery(groupIDQuery);
-
-			if(rs.next()){
-				groupID = rs.getInt(1);
-			}
-
-			statement.setInt(groupID, teacherID);
-			statement.executeUpdate();
-		}
-		rs.close();
-		getIDTeacher.close();
-		getIDGroup.close();
+		
 		statement.close();
 		conn.close();
 	}
@@ -106,28 +72,10 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * @return Nothing
 	 * */
 	@Override
-	public void addGroup(String name, String familyName, String groupName) throws SQLException{
-
+	public void addGroup(int teacherID, String groupName) throws SQLException{
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
-		int teacherID = -1;
 		int groupID = -1;
-
-		String getTeacherIDQuery = "SELECT id FROM teachers " +
-									"WHERE name = '" + name + "' AND family_name = '" + familyName + "'";
-		Statement getTeacherIDStat = conn.createStatement();
-		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
-		if(teacherRS.next()){
-			teacherID = teacherRS.getInt(1);
-		}else{
-			teacherRS.close();
-			getTeacherIDStat.close();
-			conn.close();
-
-			throw (new SQLException());
-		}
-		teacherRS.close();
-		getTeacherIDStat.close();
 
 		String getGroupIDQuery = "SELECT id FROM groups " +
 									"WHERE name = '" + groupName + "'";
@@ -169,14 +117,12 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * @return Nothing.
 	 * */
 	@Override
-	public void update(String oldName, String oldFamilyName, String newName, String newFamilyName) throws SQLException {
-
+	public void update(int teacherID, String newName, String newFamilyName) throws SQLException {
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "UPDATE teachers SET name = ?, family_name = ? WHERE name = ? AND family_name = ?";
+		String query = "UPDATE teachers SET name = ?, family_name = ? WHERE id = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(3, oldName);
-		statement.setString(4, oldFamilyName);
+		statement.setInt(3, teacherID);
 		statement.setString(1, newName);
 		statement.setString(2, newFamilyName);
 		statement.executeUpdate();
@@ -198,7 +144,6 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * */
 	@Override
 	public void delete(String name, String familyName) throws SQLException {
-		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		String query = "DELETE FROM teachers WHERE name = ? AND family_name = ?";
@@ -224,28 +169,10 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * @return Nothing
 	 * */
 	@Override
-	public void deleteCurator(String name, String familyName, String groupName) throws SQLException{
-
+	public void deleteCurator(int teacherID, String groupName) throws SQLException{
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
-		int teacherID = -1;
 		int groupID = -1;
-
-		String getTeacherIDQuery = "SELECT id FROM teachers " +
-				"WHERE name = '" + name + "' AND family_name = '" + familyName + "'";
-		Statement getTeacherIDStat = conn.createStatement();
-		ResultSet teacherRS = getTeacherIDStat.executeQuery(getTeacherIDQuery);
-		if(teacherRS.next()){
-			teacherID = teacherRS.getInt(1);
-		}else{
-			teacherRS.close();
-			getTeacherIDStat.close();
-			conn.close();
-
-			throw (new SQLException());
-		}
-		teacherRS.close();
-		getTeacherIDStat.close();
 
 		String getGroupIDQuery = "SELECT id FROM groups " +
 				"WHERE name = '" + groupName + "'";
@@ -285,7 +212,6 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * */
 	@Override
 	public List<Teacher> getByName(String name) throws SQLException {
-
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
 		List<Teacher> res = new ArrayList<Teacher>();

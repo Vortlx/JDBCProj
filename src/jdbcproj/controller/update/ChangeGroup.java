@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.DAOStudents;
 import jdbcproj.dao.daostudents.DAOStudentsConnection;
 
 /**
@@ -29,11 +29,10 @@ public class ChangeGroup extends HttpServlet{
     	DAOStudents dao = new DAOStudentsConnection();
     	
     	try{
-    		String studentName = req.getParameter("studentName");
-    		String studentFamilyName = req.getParameter("studentFamilyName");
+    		int studentID = Integer.parseInt(req.getParameter("studentID"));
     		String newGroupName = req.getParameter("newGroupName");
     		
-    		dao.updateGroup(studentName, studentFamilyName, newGroupName);
+    		dao.updateGroup(studentID, newGroupName);
     	}catch(SQLException e){
     		e.printStackTrace();
             String message = "Can't do this operation.";

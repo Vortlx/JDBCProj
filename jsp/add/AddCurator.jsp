@@ -9,8 +9,7 @@
 </head>
 <body>
     <form action="AddCuratorServ" method="POST">
-        <input name="teacherName" type="hidden" value="${param.teacherName}">
-        <input name="teacherFamilyName" type="hidden" value="${param.teacherFamilyName}">
+        <input name="teacherID" type="hidden" value="${param.teacherID}">
         Group Name: <input name="groupName" type="text" required>
         <br>
         <input name="add" type="submit" value="Add">

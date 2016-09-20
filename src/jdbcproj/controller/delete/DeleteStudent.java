@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jdbcproj.dao.daostudents.DAOStudents;
+import jdbcproj.dao.DAOStudents;
 import jdbcproj.dao.daostudents.DAOStudentsConnection;
 
 import java.io.IOException;
