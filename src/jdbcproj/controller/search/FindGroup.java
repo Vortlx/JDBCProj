@@ -18,7 +18,7 @@ import java.util.List;
 
 
 /**
- * Servlet search groups with specific properties
+ * Servlet search groups with specific name
  *
  * @author Lebedev Alexander
  * @since 2016-09-19

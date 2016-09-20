@@ -15,7 +15,7 @@ import jdbcproj.data.Teacher;
 public interface DAOTeachers {
 	
 	/**
-	 * This method insert data into teachers table.
+	 * This method add new teacher into teachers table.
 	 *
 	 * @param name Name of teacher
 	 * @param familyName Family name of teacher
@@ -30,8 +30,7 @@ public interface DAOTeachers {
 	/**
 	 * Method make teacher with specific name and family name curator of group with specific name
 	 *
-	 * @param name Name of teacher
-	 * @param familyName Family name of teacher
+	 * @param teacherID ID of teacher
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
@@ -42,8 +41,7 @@ public interface DAOTeachers {
 	/**
 	 * This method update data into teachers table.
 	 *
-	 * @param oldName Old name of teacher
-	 * @param oldFamilyName Old family name of teacher
+	 * @param teacherID ID of teacher
 	 * @param newName New name of teacher
 	 * @param newFamilyName New family name of teacher
 	 *
@@ -53,9 +51,9 @@ public interface DAOTeachers {
 	public void update(int teacherID, String newName, String newFamilyName) throws SQLException;
 
 	/**
-	 * This method delete data from teachers table.
+	 * This method delete teacher with specific name and family name from teachers table.
 	 *
-	 * @param name Name of teahcer
+	 * @param name Name of teacher
 	 * @param familyName Family name of teacher
 	 *
 	 * @throws SQLException
@@ -67,8 +65,7 @@ public interface DAOTeachers {
 	/**
 	 * Method delete teacher with specific name and family name as curator from group with specific name
 	 *
-	 * @param name Name of teahcer
-	 * @param familyName Family name of  teacher
+	 * @param teacherID ID of teacher
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
@@ -119,7 +116,7 @@ public interface DAOTeachers {
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
-	 * @retunr List List of teacher
+	 * @return List List of teacher
 	 * */
 	public List<Teacher> getByGroup(String groupName) throws SQLException;
 }

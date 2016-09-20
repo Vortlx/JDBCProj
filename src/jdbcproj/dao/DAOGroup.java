@@ -12,20 +12,28 @@ import jdbcproj.data.Group;
  * @since 2016-09-19
  * */
 public interface DAOGroup {
+	
+	/**
+	 * This method add new group into groups table .
+	 *
+	 * @param name Name of new group.
+	 * @throw SQLException
+	 * @return Nothing
+	 * */
 	public void add(String name) throws SQLException;
 	
 	/**
-	 * This method update data in groups table.
+	 * This method set new name of table.
 	 * 
-	 * @param name Old name of group
+	 * @param groupID ID of group
 	 * @param newName New name of group
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void update(String name, String newName) throws SQLException;
+	public void update(int groupID, String newName) throws SQLException;
 	
 	/**
-	 * This method delete data from groups table.
+	 * This method delete group with specific name from groups table.
 	 * 
 	 * @param name Name of group which must be deleted.
 	 * @throw SQLException

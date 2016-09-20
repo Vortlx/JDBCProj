@@ -34,7 +34,7 @@ public class DAOGroupConnection implements DAOGroup {
 	}
 
 	/**
-	 * This method insert data into groups table .
+	 * This method add new group into groups table .
 	 *
 	 * @see DAOGroup#add(String)
 	 *
@@ -56,23 +56,23 @@ public class DAOGroupConnection implements DAOGroup {
 	}
 	
 	/**
-	 * This method update data in groups table.
+	 * This method set new name of table.
 	 *
 	 * @see DAOGroup#update(String, String)
 	 *
-	 * @param name Old name of group
+	 * @param groupID ID of group
 	 * @param newName New name of group
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
 	@Override
-	public void update(String name, String newName) throws SQLException{
+	public void update(int groupID, String newName) throws SQLException{
 		
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 		
-		String query = "UPDATE groups SET name = ? WHERE name = ?";
+		String query = "UPDATE groups SET name = ? WHERE id = ?";
 		PreparedStatement statement = conn.prepareStatement(query);
-		statement.setString(2, name);
+		statement.setInt(2, groupID);
 		statement.setString(1, newName);
 		statement.executeUpdate();
 		
@@ -81,7 +81,7 @@ public class DAOGroupConnection implements DAOGroup {
 	}
 	
 	/**
-	 * This method delete data from groups table.
+	 * This method delete group with specific name from groups table. And all student which contain in this group.
 	 *
 	 * @see DAOGroup#delete(String)
 	 *

@@ -15,8 +15,7 @@ import jdbcproj.data.Student;
 public interface DAOStudents {
 
 	/**
-	 * This method insert data into students table.
-	 * 
+	 * This method add new student into students table. And this student will be contain in specific group.
 	 *
 	 *  @param name Name of student
 	 *  @param familyName Family Name of student
@@ -28,10 +27,9 @@ public interface DAOStudents {
 	public void add(String name, String familyName, String groupName) throws SQLException;
 	
 	/**
-	 * This method update data into students table.
+	 * This method update data in students table.
 	 * 
-	 * @param oldName Old name of student
-	 * @param oldFamilyName Old family name of student
+	 * @param studentID ID of student
 	 * @param newName New name of student
 	 * @param newFamilyName New family name of student
 	 *
@@ -44,8 +42,7 @@ public interface DAOStudents {
 	/**
 	 * Method change current group of student on new group
 	 *
-	 * @param name Name of student
-	 * @param familyName Family name of student
+	 * @param studentID ID of student
 	 * @param newGroupName Name of new group
 	 *
 	 * @throws SQLException
@@ -54,7 +51,7 @@ public interface DAOStudents {
 	public void updateGroup(int studentID, String newGroupName) throws SQLException;
 
 	/**
-	 * This method delete data from students table.
+	 * This method delete student with specific name and family name from students table.
 	 * 
 	 * @param name Name of student
 	 * @param familyName Family name of student

@@ -16,7 +16,7 @@ import jdbcproj.dao.daogroup.DAOGroupConnection;
 import jdbcproj.data.Group;
 
 /**
- * Servlet search groups with specific curator
+ * Servlet search specific group of teacher
  *
  * @author Lebedev Alexander
  * @since 2016-09-19

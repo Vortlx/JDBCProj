@@ -34,7 +34,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	}
 
 	/**
-	 * This method insert data into teachers table.
+	 * This method add new teacher into teachers table.
 	 *
 	 * @see DAOTeachers#add(String, String, Group...)
 	 *
@@ -64,8 +64,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 *
 	 * @see DAOTeachers#addGroup(String, String, String)
 	 *
-	 * @param name Name of teacher
-	 * @param familyName Family name of teacher
+	 * @param teacherID ID of teacher
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
@@ -108,8 +107,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 *
 	 * @see DAOTeachers#update(String, String, String, String)
 	 *
-	 * @param oldName Old name of teacher
-	 * @param oldFamilyName Old family name of teacher
+	 * @param teacherID ID of teacher
 	 * @param newName New name of teacher
 	 * @param newFamilyName New family name of teacher
 	 *
@@ -132,11 +130,11 @@ public class DAOTeachersConnection implements DAOTeachers{
 	}
 
 	/**
-	 * This method delete data from teachers table.
+	 * This method delete teacher with specific name and family name from teachers table.
 	 *
 	 * @see DAOTeachers#delete(String, String)
 	 *
-	 * @param name Name of teahcer
+	 * @param name Name of teacher
 	 * @param familyName Family name of teacher
 	 *
 	 * @throws SQLException
@@ -161,8 +159,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 *
 	 * @see DAOTeachers#deleteCurator(String, String, String)
 	 *
-	 * @param name Name of teahcer
-	 * @param familyName Family name of  teacher
+	 * @param teacherID ID of teacher
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
@@ -440,7 +437,7 @@ public class DAOTeachersConnection implements DAOTeachers{
 	 * @param groupName Name of group
 	 *
 	 * @throws SQLException
-	 * @retunr List List of teacher
+	 * @return List List of teacher
 	 * */
 	@Override
 	public List<Teacher> getByGroup(String groupName) throws SQLException{

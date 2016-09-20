@@ -34,7 +34,7 @@ public class DAOStudentsConnection implements DAOStudents{
 	}
 
 	/**
-	 * This method insert data into students table.
+	 * This method add new student into students table. And this student will be contain in specific group.
 	 *
 	 * @see DAOStudents#add(String, String, String)
 	 *
@@ -99,12 +99,11 @@ public class DAOStudentsConnection implements DAOStudents{
 	}
 
 	/**
-	 * This method update data into students table.
+	 * This method update data in students table.
 	 *
 	 * @see DAOStudents#update(String, String, String, String)
 	 *
-	 * @param oldName Old name of student
-	 * @param oldFamilyName Old family name of student
+	 * @param studentID ID of student
 	 * @param newName New name of student
 	 * @param newFamilyName New family name of student
 	 *
@@ -132,8 +131,7 @@ public class DAOStudentsConnection implements DAOStudents{
 	 *
 	 * @see DAOStudents#updateGroup(String, String, String)
 	 *
-	 * @param name Name of student
-	 * @param familyName Family name of student
+	 * @param studentID ID of student
 	 * @param newGroupName Name of new group
 	 *
 	 * @throws SQLException
@@ -174,7 +172,7 @@ public class DAOStudentsConnection implements DAOStudents{
 	}
 
 	/**
-	 * This method delete data from students table.
+	 * This method delete student with specific name and family name from students table.
 	 *
 	 * @see DAOStudents#delete(String, String)
 	 *
